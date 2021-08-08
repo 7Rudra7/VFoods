@@ -1,0 +1,181 @@
+﻿@model IEnumerable<tbl_SaleDetails>
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="print1">
+    <div>
+       
+        <h4>
+            <font face="Comic sans MS" size="6">Vishal Foods </font><br />
+        </h4>
+        At.Post.Kawalkhed Tq.Udgir Dist.Latur-413517 (M.H) <br>
+        <b>Mo:</b> 8975298000 / 7719888000 <br>
+
+        <b>GSTIN :</b> 27AALFV0060A1ZK
+    </div>
+    
+   
+<br>
+
+
+
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    /* Zebra striping */
+    tr:nth-of-type(odd) {
+        background: #eee;
+    }
+
+    th {
+        background: #333;
+        color: white;
+        font-weight: bold;
+    }
+
+    td, th {
+        padding: 6px;
+        border: 1px solid #ccc;
+        text-align: left;
+    }
+
+    div.r {
+        text-align: right;
+    }
+</style>
+
+<div id="invoice">
+    <h5>
+        <b> Invoice Number : </b>#
+        @Model.First().tbl_Sales.id
+        <br>
+        <b> Date of purchase :</b>
+        @Model.First().tbl_Sales.Date_of_purchase.ToString("dd-MM-yyyy")<br><br>
+        <b> Name of party :</b>
+        @Model.First().tbl_Sales.tbl_CustomerDetails.Customer_name /
+        @Model.First().tbl_Sales.tbl_CustomerDetails.Account_name
+        <br>
+
+        @Model.First().tbl_Sales.tbl_CustomerDetails.Address , @Model.First().tbl_Sales.tbl_CustomerDetails.City_Town , @Model.First().tbl_Sales.tbl_CustomerDetails.State
+        <br>
+        <b> Total Outstanding Balance :</b>
+        @Model.First().tbl_Sales.tbl_CustomerDetails.Balance
+
+        <br><br>
+        <b> Vehicle :</b>
+        @Model.First().tbl_Sales.tbl_Vehicle.Vehicle_number
+    </h5>
+
+    <b>Order Details :</b>
+    <table>
+        <tr>
+
+            @*<th>
+                    @Html.DisplayNameFor(model => model.ProductCode)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.tbl_Products.Product_name )
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Product_qty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product_total_price)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.TotalQty)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalAmount)
+                </th>*@
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.ProductCode)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_Products.Product_name)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product_qty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product_total_price)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.TotalQty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalAmount)
+                    </td>*@
+            </tr>
+        }
+    </table>
+
+
+    <br>
+    <br>
+    <div class="r">
+
+        <b> Total quantity :</b>@Model.Sum(i => i.Product_qty)
+        <br>
+        <b> Sub. total :</b>  @Model.Sum(i => i.Product_total_price)
+        <br>
+
+
+        <p id="gst"></p><br>
+        <b>Total :</b><p id="totalrs"></p><br>
+
+        <br>
+        <b> Comments :</b>@Model.First().tbl_Sales.Payment_status_comments<br><br><br><br>
+
+        <font face="Comic sans MS" size="3">Vishal Foods </font><br />
+        <b> Company PAN no.</b> <br>
+        AALFV006A
+
+        <script>
+            document.getElementById("gst").innerHTML = "<b>GST 18% : </b>"
+            document.getElementById("gst").innerHTML += @Model.Sum(i => i.Product_total_price) * 18 / 100;
+            //console.log(gst);
+
+            document.getElementById("totalrs").innerHTML = ( @Model.Sum(i => i.Product_total_price) * 18 / 100) + @Model.Sum(i => i.Product_total_price);
+            document.getElementById("totalrs").innerHTML += " /-"
+            //console.log(totalrs);
+
+        </script>
+    </div>
+</div>
+    </div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+    <button id="printInvoice" class="btn btn-info" onclick="printDiv()"><i class="fa fa-print" ></i> Print</button>
+</div>
+
+
+
+
+<script>
+    function printDiv() {
+        var divContents = document.getElementById("print1").innerHTML;
+        var a = window.open('', '');
+        a.document.write('<html>');
+        a.document.write('<body > ');
+        a.document.write(divContents);
+        a.document.write('</body></html>');
+        a.document.close();
+        a.print();
+    }
+    </script>
+

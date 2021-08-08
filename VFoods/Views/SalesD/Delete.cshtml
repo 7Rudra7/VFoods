@@ -1,0 +1,96 @@
+﻿@model VFoods.tbl_Sales
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tbl_Sales</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_of_purchase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_of_purchase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transporter_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transporter_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total_bill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total_bill)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount_due)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount_due)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Payment_status_comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Payment_status_comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isDelete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_CustomerDetails.Account_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_CustomerDetails.Account_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_CustomerDetails1.Account_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_CustomerDetails1.Account_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Vehicle.Vehicle_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Vehicle.Vehicle_number)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

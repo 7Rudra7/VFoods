@@ -1,0 +1,58 @@
+﻿@model VFoods.tbl_SaleDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_SaleDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_qty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_qty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_total_price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_total_price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isDelete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Products.Product_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Products.Product_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Sales.Vehicle_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Sales.Vehicle_no)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

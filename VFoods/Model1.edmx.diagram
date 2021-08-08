@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b7d7ea06b0e6471b93daa5006d36ab06" Name="Diagram1">
+        <EntityTypeShape EntityType="AquaDBModel.Category" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_CustomerDetails" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_Employee" Width="1.5" PointX="7.75" PointY="1.125" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_Login" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_lookupExpense" Width="1.5" PointX="3.75" PointY="10.125" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_Products" Width="1.5" PointX="3" PointY="6.625" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_salary" Width="1.5" PointX="10" PointY="0.875" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_SaleDetails" Width="1.5" PointX="5.25" PointY="1.25" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_Sales" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_Vehicle" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_vehicleExp" Width="1.5" PointX="6" PointY="5.875" />
+        <AssociationConnector Association="AquaDBModel.FK__tbl_Sales__custo__66EA454A" />
+        <AssociationConnector Association="AquaDBModel.FK__tbl_salar__Emp_i__2BFE89A6" />
+        <AssociationConnector Association="AquaDBModel.FK__tbl_vehic__Looku__4865BE2A" />
+        <AssociationConnector Association="AquaDBModel.FK__tbl_SaleD__Produ__02925FBF" />
+        <AssociationConnector Association="AquaDBModel.FK__tbl_SaleD__sales__019E3B86" />
+        <AssociationConnector Association="AquaDBModel.FK__tbl_Sales__Vehic__6BAEFA67" />
+        <AssociationConnector Association="AquaDBModel.FK__tbl_vehic__Vehic__4959E263" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_payments" Width="1.5" PointX="3" PointY="12.875" />
+        <AssociationConnector Association="AquaDBModel.FK__tbl_payme__Custo__10E07F16" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_Purchases" Width="1.5" PointX="8.625" PointY="9.875" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_vendor" Width="1.5" PointX="6.375" PointY="10" />
+        <AssociationConnector Association="AquaDBModel.FK__tbl_Purch__Vendo__22FF2F51" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_AccountEntries" Width="1.5" PointX="13.625" PointY="4" />
+        <EntityTypeShape EntityType="AquaDBModel.tbl_accounts" Width="1.5" PointX="11.375" PointY="4.25" />
+        <AssociationConnector Association="AquaDBModel.FK__tbl_Accou__Acc_i__37FA4C37" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

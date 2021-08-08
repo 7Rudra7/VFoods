@@ -1,0 +1,101 @@
+﻿@model IEnumerable<VFoods.tbl_CustomerDetails>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All customers </h2>
+
+<form asp-action="Index" method="get">
+
+    <p>
+        <input type="search" placeholder="Enter Account Name or Customer name " value="@ViewData["GetCustomerDetails"]" name="searching" style="width:500px" />
+        <input type="submit" value="search" class="btn btn-primary">
+        <h6>@ViewBag.search</h6>
+    </p>
+
+</form>
+
+<p>
+    <a href="@Url.Action("Create", "Customer")" class="btn btn-primary">
+
+        <span>
+            <i class="fas fa-plus-circle"></i>
+
+        </span>
+        <span>
+            <strong>Add Customer </strong>
+        </span>
+    </a>
+   
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Account_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City_Town)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City_Town)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Balance)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", "Customer", new { id = item.Id })" class="btn btn-primary">
+                <span>
+                    <i class="fas fa-edit"></i>
+                </span>
+            </a> |
+            <a href="@Url.Action("Details", "Customer", new { id = item.Id })" class="btn btn btn-success">
+                <span>
+                    <i class="fas fa-list"></i>
+                </span>
+            </a> |
+            <a href="@Url.Action("Delete", "Customer", new { id = item.Id })" class="btn btn-danger">
+                <span>
+                    <i class="fas fa-trash-alt"></i>
+                </span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

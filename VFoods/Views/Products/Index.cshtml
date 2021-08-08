@@ -1,0 +1,83 @@
+﻿@model IEnumerable<VFoods.tbl_Products>
+
+@{
+    ViewBag.Title = "Produts ";
+}
+
+<h2>Produts Listed</h2>
+
+<p>
+    
+
+    <a href="@Url.Action("Create", "Products")" class="btn btn-primary">
+
+        <span>
+            <i class="fas fa-plus-circle"></i>
+
+        </span>
+        <span>
+            <strong>Add Product </strong>
+        </span>
+    </a>
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rate_box)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Piece_box)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MRP_bottle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product_stock)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rate_box)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Piece_box)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MRP_bottle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product_stock)
+        </td>
+        <td>
+
+            <a href="@Url.Action("Edit", "Products", new { id = item.Id })" class="btn btn-primary">
+                <span>
+                    <i class="fas fa-edit"></i>
+                </span>
+            </a> |
+            <a href="@Url.Action("Details", "Products", new { id = item.Id })" class="btn btn btn-success">
+                <span>
+                    <i class="fas fa-list"></i>
+                </span>
+            </a> |
+            <a href="@Url.Action("Delete", "Products", new { id = item.Id })" class="btn btn-danger">
+                <span>
+                    <i class="fas fa-trash-alt"></i>
+                </span>
+            </a>
+
+            
+        </td>
+    </tr>
+}
+
+</table>

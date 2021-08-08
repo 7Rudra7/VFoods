@@ -1,0 +1,99 @@
+﻿@model IEnumerable<VFoods.tbl_Vehicle>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+ 
+
+    <a href="@Url.Action("Create", "Vehicle")" class="btn btn-primary">
+        <span>
+            <i class="fas fa-plus-circle"></i>
+
+        </span>
+        <span>
+            <strong>Add New Payment </strong>
+        </span>
+    </a>
+</p>
+
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicle_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fitness_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Insurance_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MH_tax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AI_tax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Permit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PUC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vehicle_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fitness_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Insurance_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MH_tax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AI_tax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Permit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PUC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", "Vehicle", new { id = item.Id })" class="btn btn-primary">
+                <span>
+                    <i class="fas fa-edit"></i>
+                </span>
+            </a> |
+            <a href="@Url.Action("Details", "Vehicle", new { id = item.Id })" class="btn btn btn-success">
+                <span>
+                    <i class="fas fa-list"></i>
+                </span>
+            </a> |
+            <a href="@Url.Action("Delete", "Vehicle", new { id = item.Id })" class="btn btn-danger">
+                <span>
+                    <i class="fas fa-trash-alt"></i>
+                </span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

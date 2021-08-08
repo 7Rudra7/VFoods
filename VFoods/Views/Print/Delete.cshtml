@@ -1,0 +1,64 @@
+﻿@model VFoods.tbl_SaleDetails
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tbl_SaleDetails</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_qty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_qty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_total_price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_total_price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isDelete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Products.Product_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Products.Product_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Sales.Vehicle_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Sales.Vehicle_no)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,58 @@
+﻿@model VFoods.tbl_Products
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_Products</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rate_box)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rate_box)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Piece_box)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Piece_box)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MRP_bottle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MRP_bottle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product_stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product_stock)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

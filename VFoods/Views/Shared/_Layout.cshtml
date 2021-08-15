@@ -15,13 +15,13 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="~/Content/Choosen/chosen.min.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;>
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -31,15 +31,60 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav ">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Employee", "Index", "Employee")</li>
-                    <li>@Html.ActionLink("Salary", "Index", "Salary")</li>
+                    @*<li>@Html.ActionLink("Employee", "Index", "Employee")</li>
+        <li>@Html.ActionLink("Salary", "Index", "Salary")</li>*@
                     <li>@Html.ActionLink("Products", "Index", "Products")</li>
                     <li>@Html.ActionLink("Customer", "Index", "Customer")</li>
-                    <li>@Html.ActionLink("GSTsale", "Index", "SalesD")</li>
-                    <li>@Html.ActionLink("Payments", "Index", "Payments")</li>
-                    <li>@Html.ActionLink("Vendor", "Index", "Vendor")</li>
-                    <li>@Html.ActionLink("Purchases", "Index", "Purchases")</li>
+                    @*<li>@Html.ActionLink("GSTsale", "Index", "SalesD")</li>
+                    <li>@Html.ActionLink("Payments", "Index", "Payments")</li>*@
+                    @*<li>@Html.ActionLink("Vendor", "Index", "Vendor")</li>
+        <li>@Html.ActionLink("Purchases", "Index", "Purchases")</li>*@
                     <li>@Html.ActionLink("Vehicle", "Index", "Vehicle")</li>
+                    @*<li>@Html.ActionLink("Accounts", "Index", "Baccounts")</li>
+        <li>@Html.ActionLink("Acc. Entries", "Index", "AccountEntries")</li>*@
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sales
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" @Html.ActionLink("GSTsale", "Index", "SalesD") </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" @Html.ActionLink("Payments", "Index", "Payments") </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Vendors
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" @Html.ActionLink("Vendor", "Index", "Vendor") </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" @Html.ActionLink("Purchases", "Index", "Purchases") </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Accounts
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" @Html.ActionLink("Accounts", "Index", "Baccounts") </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" @Html.ActionLink("Entries", "Index", "AccountEntries") </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Employee
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" @Html.ActionLink("Employee", "Index", "Employee") </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" @Html.ActionLink("Salary", "Index", "Salary") </a>
+                        </div>
+                    </li>
 
 
 
@@ -48,7 +93,7 @@
                     {
 
                         <li>@Html.ActionLink("Logout", "Logout", "Accounts")</li>
-                        <li class="text-warning">Welcome - @User.Identity.Name</li>
+                        <li class="text-success">Welcome - @User.Identity.Name</li>
                     }
                     else
                     {
@@ -58,7 +103,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -72,6 +117,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Scripts/CustomScript.js"></script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
     @RenderSection("scripts", required: false)
     
 

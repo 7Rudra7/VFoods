@@ -12,6 +12,7 @@ using System.Net;
 
 namespace VFoods.Controllers
 {
+    [Authorize]
     public class SalesDController : Controller
     {
         AquaDBEntities1 db = new AquaDBEntities1();
@@ -132,9 +133,9 @@ namespace VFoods.Controllers
 
 
 
-                string message = "*VishalAqua*" + "%0a" + "InvoiceNo: " + orderId + "%0a" + "Date of Purchase: " +
+                string message = "*VishalAqua*" + "%0a" + "*Udgir*" + "%0a" + "InvoiceNo: " + orderId + "%0a" + "Date of Purchase: " +
                     dateofpur + "%0a" + "Total Bill Amount: " + totalBill + " Rs." + "%0a" + "%0a"
-                    + "Current and Previous Balance total: " + totalOutstandingbalance + " Rs.";
+                    + "Total Outstanding balance: " + totalOutstandingbalance + " Rs.";
                 sendWhatsApp(number ,message);
             }
             catch (Exception ex)

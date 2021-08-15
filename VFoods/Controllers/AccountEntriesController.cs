@@ -11,113 +11,116 @@ using VFoods;
 namespace VFoods.Controllers
 {
     [Authorize]
-    public class EmployeeController : Controller
+    public class AccountEntriesController : Controller
     {
         private AquaDBEntities1 db = new AquaDBEntities1();
 
-        // GET: Employee
+        // GET: AccountEntries
         public ActionResult Index()
         {
-            return View(db.tbl_Employee.ToList());
+            var tbl_AccountEntries = db.tbl_AccountEntries.Include(t => t.tbl_accounts);
+            return View(tbl_AccountEntries.ToList());
         }
 
-        // GET: Employee/Details/5
-        public ActionResult Details(short? id)
+        // GET: AccountEntries/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbl_Employee tbl_Employee = db.tbl_Employee.Find(id);
-            if (tbl_Employee == null)
+            tbl_AccountEntries tbl_AccountEntries = db.tbl_AccountEntries.Find(id);
+            if (tbl_AccountEntries == null)
             {
                 return HttpNotFound();
             }
-            return View(tbl_Employee);
+            return View(tbl_AccountEntries);
         }
 
-        // GET: Employee/Create
+        // GET: AccountEntries/Create
         public ActionResult Create()
         {
+            ViewBag.Acc_id_fk = new SelectList(db.tbl_accounts, "id", "Account_name");
             return View();
         }
 
-        // POST: Employee/Create
+        // POST: AccountEntries/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Emp_ID,Emp_Name")] tbl_Employee tbl_Employee)
+        public ActionResult Create([Bind(Include = "id,Acc_id_fk,Amount,Type,Date,Comment")] tbl_AccountEntries tbl_AccountEntries)
         {
             if (ModelState.IsValid)
             {
-                db.tbl_Employee.Add(tbl_Employee);
+                db.tbl_AccountEntries.Add(tbl_AccountEntries);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tbl_Employee);
+            ViewBag.Acc_id_fk = new SelectList(db.tbl_accounts, "id", "Account_name", tbl_AccountEntries.Acc_id_fk);
+            return View(tbl_AccountEntries);
         }
 
-        // GET: Employee/Edit/5
-        public ActionResult Edit(short? id)
+        // GET: AccountEntries/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbl_Employee tbl_Employee = db.tbl_Employee.Find(id);
-            if (tbl_Employee == null)
+            tbl_AccountEntries tbl_AccountEntries = db.tbl_AccountEntries.Find(id);
+            if (tbl_AccountEntries == null)
             {
                 return HttpNotFound();
             }
-            return View(tbl_Employee);
+            ViewBag.Acc_id_fk = new SelectList(db.tbl_accounts, "id", "Account_name", tbl_AccountEntries.Acc_id_fk);
+            return View(tbl_AccountEntries);
         }
 
-        // POST: Employee/Edit/5
+        // POST: AccountEntries/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Emp_ID,Emp_Name")] tbl_Employee tbl_Employee)
+        public ActionResult Edit([Bind(Include = "id,Acc_id_fk,Amount,Type,Date,Comment")] tbl_AccountEntries tbl_AccountEntries)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tbl_Employee).State = EntityState.Modified;
+                db.Entry(tbl_AccountEntries).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tbl_Employee);
+            ViewBag.Acc_id_fk = new SelectList(db.tbl_accounts, "id", "Account_name", tbl_AccountEntries.Acc_id_fk);
+            return View(tbl_AccountEntries);
         }
 
-        // GET: Employee/Delete/5
-        public ActionResult Delete(short? id)
+        // GET: AccountEntries/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbl_Employee tbl_Employee = db.tbl_Employee.Find(id);
-            if (tbl_Employee == null)
+            tbl_AccountEntries tbl_AccountEntries = db.tbl_AccountEntries.Find(id);
+            if (tbl_AccountEntries == null)
             {
                 return HttpNotFound();
             }
-            return View(tbl_Employee);
+            return View(tbl_AccountEntries);
         }
 
-        // POST: Employee/Delete/5
+        // POST: AccountEntries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(short id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            tbl_Employee tbl_Employee = db.tbl_Employee.Find(id);
-            db.tbl_Employee.Remove(tbl_Employee);
+            tbl_AccountEntries tbl_AccountEntries = db.tbl_AccountEntries.Find(id);
+            db.tbl_AccountEntries.Remove(tbl_AccountEntries);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-
-      
         protected override void Dispose(bool disposing)
         {
             if (disposing)

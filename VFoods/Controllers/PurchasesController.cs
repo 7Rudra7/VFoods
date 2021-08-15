@@ -10,6 +10,7 @@ using VFoods;
 
 namespace VFoods.Controllers
 {
+    [Authorize]
     public class PurchasesController : Controller
     {
         private AquaDBEntities1 db = new AquaDBEntities1();

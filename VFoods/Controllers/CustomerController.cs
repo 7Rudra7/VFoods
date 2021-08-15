@@ -10,6 +10,7 @@ using VFoods;
 
 namespace VFoods.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         private AquaDBEntities1 db = new AquaDBEntities1();
@@ -152,6 +153,84 @@ namespace VFoods.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult WhatsappReminder(int? id)
+        {
+
+
+            tbl_CustomerDetails custDet = db.tbl_CustomerDetails.Find(id);
+
+            
+
+            //List<tbl_Sales> lstOrderDetails = new List<tbl_Sales>();
+
+            //List<tbl_SaleDetails> lstOrderDetails2 = new List<tbl_SaleDetails>();
+            //lstOrderDetails2 = db.tbl_SaleDetails.Where(a => a.sales_id_fk == orderId).ToList();
+            try
+            {
+                
+
+                string number = db.tbl_CustomerDetails.Where(a => a.Id == id).FirstOrDefault().Phone_number.ToString();
+                
+
+                var totalOutstandingbalance = db.tbl_CustomerDetails.Where(a => a.Id == id).FirstOrDefault().Balance.ToString();
+                
+
+
+
+                string message = "*VishalAqua*" + "%0a" + "*Udgir*" + "%0a" + "%0a" + "Hi Customer , Our records show that we haven’t yet received payment which is overdue. " +
+                    "I would appreciate if you could check" +
+                    " this out on your end. " + "%0a" + "%0a" +  "*Total Outstanding balance:* " + totalOutstandingbalance + " Rs.";
+                sendWhatsApp(number, message);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(custDet);
+        }
+
+        private void sendWhatsApp(string number, string message)
+
+        {
+            try
+
+            {
+
+                if (number == "")
+
+                {
+
+                    // MessageBox.Show("No number added");
+
+                }
+
+                if (number.Length <= 10)
+
+                {
+
+                    //MessageBox.Show("Inidan Code added automatically");
+
+                    number = "+91" + number;
+
+                }
+
+                number = number.Replace(" ", "");
+
+
+
+                System.Diagnostics.Process.Start("http://api.whatsapp.com/send?phone=" + number + "&text=" + message);
+
+
+            }
+
+            catch (Exception ex)
+
+            {
+                throw ex;
+            }
+
         }
     }
 }

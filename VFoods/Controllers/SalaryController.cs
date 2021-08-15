@@ -11,6 +11,7 @@ using VFoods;
 
 namespace VFoods.Controllers
 {
+    [Authorize]
     public class SalaryController : Controller
     {
         private AquaDBEntities1 db = new AquaDBEntities1();

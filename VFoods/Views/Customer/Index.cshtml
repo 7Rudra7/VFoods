@@ -84,7 +84,7 @@
                     <i class="fas fa-edit"></i>
                 </span>
             </a> |
-            <a href="@Url.Action("Details", "Customer", new { id = item.Id })" class="btn btn btn-success">
+            <a href="@Url.Action("Details", "Customer", new { id = item.Id })" class="btn btn-success">
                 <span>
                     <i class="fas fa-list"></i>
                 </span>
@@ -93,6 +93,10 @@
                 <span>
                     <i class="fas fa-trash-alt"></i>
                 </span>
+            </a> |
+
+            <a href="@Url.Action("WhatsappReminder", "Customer", new { id = item.Id })" class="btn btn-success">
+                Reminder
             </a>
         </td>
     </tr>

@@ -11,12 +11,17 @@ namespace VFoods
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class tbl_AccountEntries
     {
         public int id { get; set; }
+
+        [DisplayName("Accout Name")]
         public short Acc_id_fk { get; set; }
         public decimal Amount { get; set; }
+
+        [DisplayName("Is Credit ")]
         public bool Type { get; set; }
         public System.DateTime Date { get; set; }
         public string Comment { get; set; }

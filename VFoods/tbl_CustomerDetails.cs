@@ -17,8 +17,8 @@ namespace VFoods
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_CustomerDetails()
         {
-            this.tbl_Sales = new HashSet<tbl_Sales>();
             this.tbl_payments = new HashSet<tbl_payments>();
+            this.tbl_Sales = new HashSet<tbl_Sales>();
         }
     
         public int Id { get; set; }
@@ -29,10 +29,12 @@ namespace VFoods
         public string State { get; set; }
         public string City_Town { get; set; }
         public decimal Balance { get; set; }
+        public Nullable<bool> isDelete { get; set; }
+        public string GSTnumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Sales> tbl_Sales { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_payments> tbl_payments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_Sales> tbl_Sales { get; set; }
     }
 }

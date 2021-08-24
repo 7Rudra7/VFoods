@@ -23,6 +23,7 @@ namespace VFoods
         public short id { get; set; }
         public string Account_name { get; set; }
         public decimal Balance { get; set; }
+        public Nullable<bool> isDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_AccountEntries> tbl_AccountEntries { get; set; }

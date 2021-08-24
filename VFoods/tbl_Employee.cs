@@ -22,6 +22,7 @@ namespace VFoods
     
         public short Emp_ID { get; set; }
         public string Emp_Name { get; set; }
+        public Nullable<bool> isDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_salary> tbl_salary { get; set; }

@@ -26,20 +26,22 @@ namespace VFoods
         }
     
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<tbl_AccountEntries> tbl_AccountEntries { get; set; }
+        public virtual DbSet<tbl_accounts> tbl_accounts { get; set; }
         public virtual DbSet<tbl_CustomerDetails> tbl_CustomerDetails { get; set; }
         public virtual DbSet<tbl_Employee> tbl_Employee { get; set; }
+        public virtual DbSet<tbl_expensesEntries> tbl_expensesEntries { get; set; }
         public virtual DbSet<tbl_Login> tbl_Login { get; set; }
         public virtual DbSet<tbl_lookupExpense> tbl_lookupExpense { get; set; }
+        public virtual DbSet<tbl_payments> tbl_payments { get; set; }
         public virtual DbSet<tbl_Products> tbl_Products { get; set; }
+        public virtual DbSet<tbl_Purchases> tbl_Purchases { get; set; }
         public virtual DbSet<tbl_salary> tbl_salary { get; set; }
         public virtual DbSet<tbl_SaleDetails> tbl_SaleDetails { get; set; }
         public virtual DbSet<tbl_Sales> tbl_Sales { get; set; }
+        public virtual DbSet<tbl_Stockentry> tbl_Stockentry { get; set; }
         public virtual DbSet<tbl_Vehicle> tbl_Vehicle { get; set; }
         public virtual DbSet<tbl_vehicleExp> tbl_vehicleExp { get; set; }
-        public virtual DbSet<tbl_payments> tbl_payments { get; set; }
-        public virtual DbSet<tbl_Purchases> tbl_Purchases { get; set; }
         public virtual DbSet<tbl_vendor> tbl_vendor { get; set; }
-        public virtual DbSet<tbl_AccountEntries> tbl_AccountEntries { get; set; }
-        public virtual DbSet<tbl_accounts> tbl_accounts { get; set; }
     }
 }

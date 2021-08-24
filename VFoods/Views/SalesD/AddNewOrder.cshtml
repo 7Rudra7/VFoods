@@ -1,5 +1,5 @@
 ﻿
-<h2>Add New Order</h2>
+<h2>GST sales</h2>
 
 @{ ViewBag.Title = "AddNewOrder";
                 Layout = "~/Views/Shared/_Layout.cshtml"; }
@@ -176,7 +176,7 @@
                             if (pCode == thisPCode) {
                                 var thisQty = parseInt($(this).closest('tr').find(".tdQty").html());
                                 var thisAmt = parseInt($(this).closest('tr').find(".tdAmt").html());
-
+                                var thisAmt = 0.18 * thisAmt;
                                 $(this).closest('tr').find(".tdQty").html(parseInt(thisQty) + parseInt(pQty));
 
                                 var updatedQty = parseInt($(this).closest('tr').find(".tdQty").html());
@@ -211,6 +211,12 @@
 
                             tr = $('<tr/>');
                             var rate = $("#price").val();
+                            var GST = 0.18 * rate;
+
+                            var rate = rate - GST;
+
+
+
                             tr.append("<td class='tdPCode' style='display:none'>" + data.Id + "</td>");
                             tr.append("<td>" + data.Product_name + "</td>");
                             

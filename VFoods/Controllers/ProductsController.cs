@@ -18,7 +18,10 @@ namespace VFoods.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View(db.tbl_Products.ToList());
+
+            var tbl_Products = db.tbl_Products.Where(x => x.isDelete != true).ToList();
+
+            return View(tbl_Products);
         }
 
         // GET: Products/Details/5
@@ -28,6 +31,7 @@ namespace VFoods.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             tbl_Products tbl_Products = db.tbl_Products.Find(id);
             if (tbl_Products == null)
             {
@@ -111,7 +115,9 @@ namespace VFoods.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             tbl_Products tbl_Products = db.tbl_Products.Find(id);
-            db.tbl_Products.Remove(tbl_Products);
+            //db.tbl_Products.Remove(tbl_Products);
+            tbl_Products.isDelete = true;
+            db.Entry(tbl_Products).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

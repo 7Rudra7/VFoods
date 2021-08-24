@@ -1,0 +1,14 @@
+﻿@model IEnumerable<VFoods.tbl_CustomerDetails>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Summary</h2>
+
+<i class="fas fa-money-bill-wave"></i>  Total Outstanding Balance : 
+<div style="color:red">
+    &#x20b9;
+    @Model.Sum(i => i.Balance)
+</div>
+
+

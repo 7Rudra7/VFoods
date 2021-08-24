@@ -1,4 +1,6 @@
-﻿<h2 style="text-align:center">Orders</h2>
+﻿@using PagedList;
+@using PagedList.Mvc;
+<h2 style="text-align:center">GST sale orders</h2>
 
 
 
@@ -15,14 +17,14 @@
 
 
 
-<table class="table-striped" id="tblOrder">
+<table class="table-striped" id="tblOrder" style="display:none">
     <thead>
         <tr>
             <th>Order ID</th>
             <th>Order Date</th>
             <th>Transporter Name</th>
             <th>Comments</th>
-            @*<th>Total Quantity</th>*@
+
             <th>Total Amount</th>
             <th>Amount Due</th>
 
@@ -37,9 +39,10 @@
 
 
 
+
 @section scripts{
     <script>
-        
+
         $(document).ready(function () {
 
             $.ajax({
@@ -47,17 +50,17 @@
                 url: "/SalesD/GetAllOrders/",
                 cache: false,
                 success: function (data) {
-                    //alert(JSON.stringify(data));
+                   
                     $('#tBodyOrder').empty();
                     var tr;
                     for (var i = 0; i < data.length; i++) {
                         tr = $('<tr/>');
 
                         tr.append("<td>" + data[i].id + "</td>");
-                        
+
                         var str = data[i].Date_of_purchase;
 
-                       
+
                         var txt = str.toString();;
                         var numb = txt.match(/\d/g);
                         numb = numb.join("");
@@ -65,15 +68,14 @@
                         var date1 = new Date(parseInt(data1.date_created));
 
                         //var fdate = (date1.getMonth() + 1) + '/' + date1.getDate() + '/' + date1.getFullYear()
-                      
+
                         var fdate = date1.getDate() + '/ ' + (date1.getMonth() + 1) + '/ ' + date1.getFullYear()
-                        
+
 
                         tr.append("<td>" + fdate + "</td>");
                         tr.append("<td>" + data[i].Transporter_name + "</td>");
                         tr.append("<td>" + data[i].Payment_status_comments + "</td>");
-                        //tr.append("<td>" + data[i].TotalQty + "</td>");
-                        //tr.append("<td>" + data[i].CustomerID + "</td>");
+                   
                         tr.append("<td>" + data[i].Total_bill + "</td>");
                         tr.append("<td>" + data[i].Amount_due + "</td>");
 
@@ -98,10 +100,15 @@
             $('#tblOrder').DataTable(
                 {
                     paging: false,
+                    
                     ordering: false,
                     searching: false,
-                    info: false
+                    info: false,
+                   
                 });
+            $('#tblOrder').show();
         });
     </script>
+
+   
 }

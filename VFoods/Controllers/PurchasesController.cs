@@ -19,7 +19,8 @@ namespace VFoods.Controllers
         public ActionResult Index()
         {
             var tbl_Purchases = db.tbl_Purchases.Include(t => t.tbl_vendor);
-            return View(tbl_Purchases.ToList());
+            var tbl_p2 = tbl_Purchases.Where(t => t.isDelete != true).ToList();
+            return View(tbl_p2);
         }
 
         // GET: Purchases/Details/5
@@ -116,7 +117,9 @@ namespace VFoods.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             tbl_Purchases tbl_Purchases = db.tbl_Purchases.Find(id);
-            db.tbl_Purchases.Remove(tbl_Purchases);
+            tbl_Purchases.isDelete = true;
+            db.Entry(tbl_Purchases).State = EntityState.Modified;
+            //db.tbl_Purchases.Remove(tbl_Purchases);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

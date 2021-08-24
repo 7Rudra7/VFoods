@@ -18,7 +18,8 @@ namespace VFoods.Controllers
         // GET: Vehicle
         public ActionResult Index()
         {
-            return View(db.tbl_Vehicle.ToList());
+            var tbl_vehicles = db.tbl_Vehicle.Where(x => x.isDelete != true).ToList();
+            return View(tbl_vehicles);
         }
 
         // GET: Vehicle/Details/5
@@ -111,7 +112,9 @@ namespace VFoods.Controllers
         public ActionResult DeleteConfirmed(short id)
         {
             tbl_Vehicle tbl_Vehicle = db.tbl_Vehicle.Find(id);
-            db.tbl_Vehicle.Remove(tbl_Vehicle);
+            tbl_Vehicle.isDelete = true;
+            db.Entry(tbl_Vehicle).State = EntityState.Modified;
+            //db.tbl_Vehicle.Remove(tbl_Vehicle);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

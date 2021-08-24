@@ -19,6 +19,7 @@ namespace VFoods
         public System.DateTime Date { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
+        public Nullable<bool> isDelete { get; set; }
     
         public virtual tbl_vendor tbl_vendor { get; set; }
     }

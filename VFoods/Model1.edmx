@@ -11,6 +11,7 @@
           </Key>
           <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategortyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isdelete" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_AccountEntries">
           <Key>
@@ -22,6 +23,7 @@
           <Property Name="Type" Type="bit" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="isDelete" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_accounts">
           <Key>
@@ -30,6 +32,7 @@
           <Property Name="id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Account_name" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Balance" Type="numeric" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="isDelete" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_CustomerDetails">
           <Key>
@@ -43,6 +46,8 @@
           <Property Name="State" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="City_Town" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Balance" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="GSTnumber" Type="nvarchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="tbl_Employee">
           <Key>
@@ -50,6 +55,17 @@
           </Key>
           <Property Name="Emp_ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Emp_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_expensesEntries">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cat_id_fk" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amout" Type="int" Nullable="false" />
+          <Property Name="isDelete" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_Login">
           <Key>
@@ -65,6 +81,7 @@
           </Key>
           <Property Name="id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Expense" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="isDelete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_payments">
           <Key>
@@ -76,6 +93,7 @@
           <Property Name="sale_id" Type="int" />
           <Property Name="Amount" Type="decimal" Precision="9" Scale="2" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="25" />
+          <Property Name="isDelete" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_Products">
           <Key>
@@ -87,6 +105,7 @@
           <Property Name="Piece_box" Type="smallint" Nullable="false" />
           <Property Name="MRP_bottle" Type="smallint" Nullable="false" />
           <Property Name="Product_stock" Type="int" Nullable="false" />
+          <Property Name="isDelete" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_Purchases">
           <Key>
@@ -97,6 +116,7 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="9" Scale="2" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDelete" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_salary">
           <Key>
@@ -106,6 +126,7 @@
           <Property Name="Emp_id_fk" Type="smallint" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="isDelete" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_SaleDetails">
           <Key>
@@ -116,7 +137,7 @@
           <Property Name="Product_id_fk" Type="int" Nullable="false" />
           <Property Name="Product_qty" Type="smallint" Nullable="false" />
           <Property Name="Product_total_price" Type="decimal" Precision="9" Scale="2" Nullable="false" />
-          <Property Name="isDelete" Type="tinyint" Nullable="false" />
+          <Property Name="isDelete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_Sales">
           <Key>
@@ -130,7 +151,18 @@
           <Property Name="Amount_due" Type="decimal" Precision="9" Scale="2" Nullable="false" />
           <Property Name="Payment_status_comments" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="customer_id_fk" Type="int" Nullable="false" />
-          <Property Name="isDelete" Type="tinyint" Nullable="false" />
+          <Property Name="isDelete" Type="bit" Nullable="false" />
+          <Property Name="isGST" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Stockentry">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pro_id_fk" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="qty" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="isDelete" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_Vehicle">
           <Key>
@@ -145,6 +177,7 @@
           <Property Name="Permit" Type="date" Nullable="false" />
           <Property Name="PUC" Type="date" Nullable="false" />
           <Property Name="Comments" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDelete" Type="bit" />
         </EntityType>
         <EntityType Name="tbl_vehicleExp">
           <Key>
@@ -163,6 +196,7 @@
           <Property Name="VendorName" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="VendorNumber" Type="bigint" Nullable="false" />
           <Property Name="VendorAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="isDelete" Type="bit" />
         </EntityType>
         <Association Name="FK__tbl_Accou__Acc_i__37FA4C37">
           <End Role="tbl_accounts" Type="Self.tbl_accounts" Multiplicity="1" />
@@ -173,6 +207,18 @@
             </Principal>
             <Dependent Role="tbl_AccountEntries">
               <PropertyRef Name="Acc_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_expen__Cat_i__558AAF1E">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="tbl_expensesEntries" Type="Self.tbl_expensesEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="tbl_expensesEntries">
+              <PropertyRef Name="Cat_id_fk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -320,6 +366,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__tbl_Stock__Pro_i__4B0D20AB">
+          <End Role="tbl_Products" Type="Self.tbl_Products" Multiplicity="1" />
+          <End Role="tbl_Stockentry" Type="Self.tbl_Stockentry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Stockentry">
+              <PropertyRef Name="Pro_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__tbl_vehic__Looku__4865BE2A">
           <End Role="tbl_lookupExpense" Type="Self.tbl_lookupExpense" Multiplicity="0..1" />
           <End Role="tbl_vehicleExp" Type="Self.tbl_vehicleExp" Multiplicity="*" />
@@ -350,6 +408,7 @@
           <EntitySet Name="tbl_accounts" EntityType="Self.tbl_accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_CustomerDetails" EntityType="Self.tbl_CustomerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_expensesEntries" EntityType="Self.tbl_expensesEntries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Login" EntityType="Self.tbl_Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_lookupExpense" EntityType="Self.tbl_lookupExpense" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_payments" EntityType="Self.tbl_payments" Schema="dbo" store:Type="Tables" />
@@ -358,12 +417,17 @@
           <EntitySet Name="tbl_salary" EntityType="Self.tbl_salary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_SaleDetails" EntityType="Self.tbl_SaleDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Sales" EntityType="Self.tbl_Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Stockentry" EntityType="Self.tbl_Stockentry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Vehicle" EntityType="Self.tbl_Vehicle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_vehicleExp" EntityType="Self.tbl_vehicleExp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_vendor" EntityType="Self.tbl_vendor" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__tbl_Accou__Acc_i__37FA4C37" Association="Self.FK__tbl_Accou__Acc_i__37FA4C37">
             <End Role="tbl_accounts" EntitySet="tbl_accounts" />
             <End Role="tbl_AccountEntries" EntitySet="tbl_AccountEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_expen__Cat_i__558AAF1E" Association="Self.FK__tbl_expen__Cat_i__558AAF1E">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="tbl_expensesEntries" EntitySet="tbl_expensesEntries" />
           </AssociationSet>
           <AssociationSet Name="FK__tbl_payme__Custo__10E07F16" Association="Self.FK__tbl_payme__Custo__10E07F16">
             <End Role="tbl_CustomerDetails" EntitySet="tbl_CustomerDetails" />
@@ -413,6 +477,10 @@
             <End Role="tbl_Vehicle" EntitySet="tbl_Vehicle" />
             <End Role="tbl_Sales" EntitySet="tbl_Sales" />
           </AssociationSet>
+          <AssociationSet Name="FK__tbl_Stock__Pro_i__4B0D20AB" Association="Self.FK__tbl_Stock__Pro_i__4B0D20AB">
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+            <End Role="tbl_Stockentry" EntitySet="tbl_Stockentry" />
+          </AssociationSet>
           <AssociationSet Name="FK__tbl_vehic__Looku__4865BE2A" Association="Self.FK__tbl_vehic__Looku__4865BE2A">
             <End Role="tbl_lookupExpense" EntitySet="tbl_lookupExpense" />
             <End Role="tbl_vehicleExp" EntitySet="tbl_vehicleExp" />
@@ -428,17 +496,40 @@
       <Schema Namespace="AquaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="AquaDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="AquaDBModel.Category" />
+          <EntitySet Name="tbl_AccountEntries" EntityType="AquaDBModel.tbl_AccountEntries" />
+          <EntitySet Name="tbl_accounts" EntityType="AquaDBModel.tbl_accounts" />
           <EntitySet Name="tbl_CustomerDetails" EntityType="AquaDBModel.tbl_CustomerDetails" />
           <EntitySet Name="tbl_Employee" EntityType="AquaDBModel.tbl_Employee" />
+          <EntitySet Name="tbl_expensesEntries" EntityType="AquaDBModel.tbl_expensesEntries" />
           <EntitySet Name="tbl_Login" EntityType="AquaDBModel.tbl_Login" />
           <EntitySet Name="tbl_lookupExpense" EntityType="AquaDBModel.tbl_lookupExpense" />
+          <EntitySet Name="tbl_payments" EntityType="AquaDBModel.tbl_payments" />
           <EntitySet Name="tbl_Products" EntityType="AquaDBModel.tbl_Products" />
+          <EntitySet Name="tbl_Purchases" EntityType="AquaDBModel.tbl_Purchases" />
           <EntitySet Name="tbl_salary" EntityType="AquaDBModel.tbl_salary" />
           <EntitySet Name="tbl_SaleDetails" EntityType="AquaDBModel.tbl_SaleDetails" />
           <EntitySet Name="tbl_Sales" EntityType="AquaDBModel.tbl_Sales" />
+          <EntitySet Name="tbl_Stockentry" EntityType="AquaDBModel.tbl_Stockentry" />
           <EntitySet Name="tbl_Vehicle" EntityType="AquaDBModel.tbl_Vehicle" />
           <EntitySet Name="tbl_vehicleExp" EntityType="AquaDBModel.tbl_vehicleExp" />
+          <EntitySet Name="tbl_vendor" EntityType="AquaDBModel.tbl_vendor" />
+          <AssociationSet Name="FK__tbl_expen__Cat_i__558AAF1E" Association="AquaDBModel.FK__tbl_expen__Cat_i__558AAF1E">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="tbl_expensesEntries" EntitySet="tbl_expensesEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Accou__Acc_i__37FA4C37" Association="AquaDBModel.FK__tbl_Accou__Acc_i__37FA4C37">
+            <End Role="tbl_accounts" EntitySet="tbl_accounts" />
+            <End Role="tbl_AccountEntries" EntitySet="tbl_AccountEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_payme__Custo__10E07F16" Association="AquaDBModel.FK__tbl_payme__Custo__10E07F16">
+            <End Role="tbl_CustomerDetails" EntitySet="tbl_CustomerDetails" />
+            <End Role="tbl_payments" EntitySet="tbl_payments" />
+          </AssociationSet>
           <AssociationSet Name="FK__tbl_Sales__custo__66EA454A" Association="AquaDBModel.FK__tbl_Sales__custo__66EA454A">
+            <End Role="tbl_CustomerDetails" EntitySet="tbl_CustomerDetails" />
+            <End Role="tbl_Sales" EntitySet="tbl_Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Sales__custo__6CA31EA0" Association="AquaDBModel.FK__tbl_Sales__custo__6CA31EA0">
             <End Role="tbl_CustomerDetails" EntitySet="tbl_CustomerDetails" />
             <End Role="tbl_Sales" EntitySet="tbl_Sales" />
           </AssociationSet>
@@ -454,7 +545,31 @@
             <End Role="tbl_Products" EntitySet="tbl_Products" />
             <End Role="tbl_SaleDetails" EntitySet="tbl_SaleDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK__tbl_SaleD__Produ__0C1BC9F9" Association="AquaDBModel.FK__tbl_SaleD__Produ__0C1BC9F9">
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+            <End Role="tbl_SaleDetails" EntitySet="tbl_SaleDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_SaleD__Produ__7B264821" Association="AquaDBModel.FK__tbl_SaleD__Produ__7B264821">
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+            <End Role="tbl_SaleDetails" EntitySet="tbl_SaleDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Stock__Pro_i__4B0D20AB" Association="AquaDBModel.FK__tbl_Stock__Pro_i__4B0D20AB">
+            <End Role="tbl_Products" EntitySet="tbl_Products" />
+            <End Role="tbl_Stockentry" EntitySet="tbl_Stockentry" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_Purch__Vendo__22FF2F51" Association="AquaDBModel.FK__tbl_Purch__Vendo__22FF2F51">
+            <End Role="tbl_vendor" EntitySet="tbl_vendor" />
+            <End Role="tbl_Purchases" EntitySet="tbl_Purchases" />
+          </AssociationSet>
           <AssociationSet Name="FK__tbl_SaleD__sales__019E3B86" Association="AquaDBModel.FK__tbl_SaleD__sales__019E3B86">
+            <End Role="tbl_Sales" EntitySet="tbl_Sales" />
+            <End Role="tbl_SaleDetails" EntitySet="tbl_SaleDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_SaleD__sales__0B27A5C0" Association="AquaDBModel.FK__tbl_SaleD__sales__0B27A5C0">
+            <End Role="tbl_Sales" EntitySet="tbl_Sales" />
+            <End Role="tbl_SaleDetails" EntitySet="tbl_SaleDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_SaleD__sales__7A3223E8" Association="AquaDBModel.FK__tbl_SaleD__sales__7A3223E8">
             <End Role="tbl_Sales" EntitySet="tbl_Sales" />
             <End Role="tbl_SaleDetails" EntitySet="tbl_SaleDetails" />
           </AssociationSet>
@@ -466,23 +581,6 @@
             <End Role="tbl_Vehicle" EntitySet="tbl_Vehicle" />
             <End Role="tbl_vehicleExp" EntitySet="tbl_vehicleExp" />
           </AssociationSet>
-          <EntitySet Name="tbl_payments" EntityType="AquaDBModel.tbl_payments" />
-          <AssociationSet Name="FK__tbl_payme__Custo__10E07F16" Association="AquaDBModel.FK__tbl_payme__Custo__10E07F16">
-            <End Role="tbl_CustomerDetails" EntitySet="tbl_CustomerDetails" />
-            <End Role="tbl_payments" EntitySet="tbl_payments" />
-          </AssociationSet>
-          <EntitySet Name="tbl_Purchases" EntityType="AquaDBModel.tbl_Purchases" />
-          <EntitySet Name="tbl_vendor" EntityType="AquaDBModel.tbl_vendor" />
-          <AssociationSet Name="FK__tbl_Purch__Vendo__22FF2F51" Association="AquaDBModel.FK__tbl_Purch__Vendo__22FF2F51">
-            <End Role="tbl_vendor" EntitySet="tbl_vendor" />
-            <End Role="tbl_Purchases" EntitySet="tbl_Purchases" />
-          </AssociationSet>
-          <EntitySet Name="tbl_AccountEntries" EntityType="AquaDBModel.tbl_AccountEntries" />
-          <EntitySet Name="tbl_accounts" EntityType="AquaDBModel.tbl_accounts" />
-          <AssociationSet Name="FK__tbl_Accou__Acc_i__37FA4C37" Association="AquaDBModel.FK__tbl_Accou__Acc_i__37FA4C37">
-            <End Role="tbl_accounts" EntitySet="tbl_accounts" />
-            <End Role="tbl_AccountEntries" EntitySet="tbl_AccountEntries" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -490,6 +588,31 @@
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategortyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isdelete" Type="Boolean" />
+          <NavigationProperty Name="tbl_expensesEntries" Relationship="AquaDBModel.FK__tbl_expen__Cat_i__558AAF1E" FromRole="Category" ToRole="tbl_expensesEntries" />
+        </EntityType>
+        <EntityType Name="tbl_AccountEntries">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Acc_id_fk" Type="Int16" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Type" Type="Boolean" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="isDelete" Type="Boolean" />
+          <NavigationProperty Name="tbl_accounts" Relationship="AquaDBModel.FK__tbl_Accou__Acc_i__37FA4C37" FromRole="tbl_AccountEntries" ToRole="tbl_accounts" />
+        </EntityType>
+        <EntityType Name="tbl_accounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Account_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="isDelete" Type="Boolean" />
+          <NavigationProperty Name="tbl_AccountEntries" Relationship="AquaDBModel.FK__tbl_Accou__Acc_i__37FA4C37" FromRole="tbl_accounts" ToRole="tbl_AccountEntries" />
         </EntityType>
         <EntityType Name="tbl_CustomerDetails">
           <Key>
@@ -503,8 +626,10 @@
           <Property Name="State" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="City_Town" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Balance" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <NavigationProperty Name="tbl_Sales" Relationship="AquaDBModel.FK__tbl_Sales__custo__66EA454A" FromRole="tbl_CustomerDetails" ToRole="tbl_Sales" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="GSTnumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbl_payments" Relationship="AquaDBModel.FK__tbl_payme__Custo__10E07F16" FromRole="tbl_CustomerDetails" ToRole="tbl_payments" />
+          <NavigationProperty Name="tbl_Sales" Relationship="AquaDBModel.FK__tbl_Sales__custo__66EA454A" FromRole="tbl_CustomerDetails" ToRole="tbl_Sales" />
         </EntityType>
         <EntityType Name="tbl_Employee">
           <Key>
@@ -513,6 +638,18 @@
           <Property Name="Emp_ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Emp_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbl_salary" Relationship="AquaDBModel.FK__tbl_salar__Emp_i__2BFE89A6" FromRole="tbl_Employee" ToRole="tbl_salary" />
+          <Property Name="isDelete" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_expensesEntries">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cat_id_fk" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amout" Type="Int32" Nullable="false" />
+          <Property Name="isDelete" Type="Boolean" />
+          <NavigationProperty Name="Category" Relationship="AquaDBModel.FK__tbl_expen__Cat_i__558AAF1E" FromRole="tbl_expensesEntries" ToRole="Category" />
         </EntityType>
         <EntityType Name="tbl_Login">
           <Key>
@@ -528,7 +665,21 @@
           </Key>
           <Property Name="id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Expense" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="isDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbl_vehicleExp" Relationship="AquaDBModel.FK__tbl_vehic__Looku__4865BE2A" FromRole="tbl_lookupExpense" ToRole="tbl_vehicleExp" />
+        </EntityType>
+        <EntityType Name="tbl_payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Customerid_fk" Type="Int32" Nullable="false" />
+          <Property Name="sale_id" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="Comment" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="isDelete" Type="Boolean" />
+          <NavigationProperty Name="tbl_CustomerDetails" Relationship="AquaDBModel.FK__tbl_payme__Custo__10E07F16" FromRole="tbl_payments" ToRole="tbl_CustomerDetails" />
         </EntityType>
         <EntityType Name="tbl_Products">
           <Key>
@@ -540,7 +691,21 @@
           <Property Name="Piece_box" Type="Int16" Nullable="false" />
           <Property Name="MRP_bottle" Type="Int16" Nullable="false" />
           <Property Name="Product_stock" Type="Int32" Nullable="false" />
+          <Property Name="isDelete" Type="Boolean" />
           <NavigationProperty Name="tbl_SaleDetails" Relationship="AquaDBModel.FK__tbl_SaleD__Produ__02925FBF" FromRole="tbl_Products" ToRole="tbl_SaleDetails" />
+          <NavigationProperty Name="tbl_Stockentry" Relationship="AquaDBModel.FK__tbl_Stock__Pro_i__4B0D20AB" FromRole="tbl_Products" ToRole="tbl_Stockentry" />
+        </EntityType>
+        <EntityType Name="tbl_Purchases">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vendor_id_fk" Type="Int16" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isDelete" Type="Boolean" />
+          <NavigationProperty Name="tbl_vendor" Relationship="AquaDBModel.FK__tbl_Purch__Vendo__22FF2F51" FromRole="tbl_Purchases" ToRole="tbl_vendor" />
         </EntityType>
         <EntityType Name="tbl_salary">
           <Key>
@@ -550,6 +715,7 @@
           <Property Name="Emp_id_fk" Type="Int16" Nullable="false" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="isDelete" Type="Boolean" />
           <NavigationProperty Name="tbl_Employee" Relationship="AquaDBModel.FK__tbl_salar__Emp_i__2BFE89A6" FromRole="tbl_salary" ToRole="tbl_Employee" />
         </EntityType>
         <EntityType Name="tbl_SaleDetails">
@@ -561,7 +727,7 @@
           <Property Name="Product_id_fk" Type="Int32" Nullable="false" />
           <Property Name="Product_qty" Type="Int16" Nullable="false" />
           <Property Name="Product_total_price" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <Property Name="isDelete" Type="Byte" Nullable="false" />
+          <Property Name="isDelete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tbl_Products" Relationship="AquaDBModel.FK__tbl_SaleD__Produ__02925FBF" FromRole="tbl_SaleDetails" ToRole="tbl_Products" />
           <NavigationProperty Name="tbl_Sales" Relationship="AquaDBModel.FK__tbl_SaleD__sales__019E3B86" FromRole="tbl_SaleDetails" ToRole="tbl_Sales" />
         </EntityType>
@@ -577,10 +743,22 @@
           <Property Name="Amount_due" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
           <Property Name="Payment_status_comments" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="customer_id_fk" Type="Int32" Nullable="false" />
-          <Property Name="isDelete" Type="Byte" Nullable="false" />
+          <Property Name="isDelete" Type="Boolean" Nullable="false" />
+          <Property Name="isGST" Type="Boolean" />
           <NavigationProperty Name="tbl_CustomerDetails" Relationship="AquaDBModel.FK__tbl_Sales__custo__66EA454A" FromRole="tbl_Sales" ToRole="tbl_CustomerDetails" />
           <NavigationProperty Name="tbl_SaleDetails" Relationship="AquaDBModel.FK__tbl_SaleD__sales__019E3B86" FromRole="tbl_Sales" ToRole="tbl_SaleDetails" />
           <NavigationProperty Name="tbl_Vehicle" Relationship="AquaDBModel.FK__tbl_Sales__Vehic__6BAEFA67" FromRole="tbl_Sales" ToRole="tbl_Vehicle" />
+        </EntityType>
+        <EntityType Name="tbl_Stockentry">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pro_id_fk" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="qty" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="isDelete" Type="Boolean" />
+          <NavigationProperty Name="tbl_Products" Relationship="AquaDBModel.FK__tbl_Stock__Pro_i__4B0D20AB" FromRole="tbl_Stockentry" ToRole="tbl_Products" />
         </EntityType>
         <EntityType Name="tbl_Vehicle">
           <Key>
@@ -595,6 +773,7 @@
           <Property Name="Permit" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PUC" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Comments" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isDelete" Type="Boolean" />
           <NavigationProperty Name="tbl_Sales" Relationship="AquaDBModel.FK__tbl_Sales__Vehic__6BAEFA67" FromRole="tbl_Vehicle" ToRole="tbl_Sales" />
           <NavigationProperty Name="tbl_vehicleExp" Relationship="AquaDBModel.FK__tbl_vehic__Vehic__4959E263" FromRole="tbl_Vehicle" ToRole="tbl_vehicleExp" />
         </EntityType>
@@ -609,7 +788,66 @@
           <NavigationProperty Name="tbl_lookupExpense" Relationship="AquaDBModel.FK__tbl_vehic__Looku__4865BE2A" FromRole="tbl_vehicleExp" ToRole="tbl_lookupExpense" />
           <NavigationProperty Name="tbl_Vehicle" Relationship="AquaDBModel.FK__tbl_vehic__Vehic__4959E263" FromRole="tbl_vehicleExp" ToRole="tbl_Vehicle" />
         </EntityType>
+        <EntityType Name="tbl_vendor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="VendorNumber" Type="Int64" Nullable="false" />
+          <Property Name="VendorAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isDelete" Type="Boolean" />
+          <NavigationProperty Name="tbl_Purchases" Relationship="AquaDBModel.FK__tbl_Purch__Vendo__22FF2F51" FromRole="tbl_vendor" ToRole="tbl_Purchases" />
+        </EntityType>
+        <Association Name="FK__tbl_expen__Cat_i__558AAF1E">
+          <End Type="AquaDBModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="AquaDBModel.tbl_expensesEntries" Role="tbl_expensesEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="tbl_expensesEntries">
+              <PropertyRef Name="Cat_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Accou__Acc_i__37FA4C37">
+          <End Type="AquaDBModel.tbl_accounts" Role="tbl_accounts" Multiplicity="1" />
+          <End Type="AquaDBModel.tbl_AccountEntries" Role="tbl_AccountEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_AccountEntries">
+              <PropertyRef Name="Acc_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_payme__Custo__10E07F16">
+          <End Type="AquaDBModel.tbl_CustomerDetails" Role="tbl_CustomerDetails" Multiplicity="1" />
+          <End Type="AquaDBModel.tbl_payments" Role="tbl_payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_CustomerDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_payments">
+              <PropertyRef Name="Customerid_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__tbl_Sales__custo__66EA454A">
+          <End Type="AquaDBModel.tbl_CustomerDetails" Role="tbl_CustomerDetails" Multiplicity="1" />
+          <End Type="AquaDBModel.tbl_Sales" Role="tbl_Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_CustomerDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Sales">
+              <PropertyRef Name="customer_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Sales__custo__6CA31EA0">
           <End Type="AquaDBModel.tbl_CustomerDetails" Role="tbl_CustomerDetails" Multiplicity="1" />
           <End Type="AquaDBModel.tbl_Sales" Role="tbl_Sales" Multiplicity="*" />
           <ReferentialConstraint>
@@ -657,7 +895,79 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__tbl_SaleD__Produ__0C1BC9F9">
+          <End Type="AquaDBModel.tbl_Products" Role="tbl_Products" Multiplicity="1" />
+          <End Type="AquaDBModel.tbl_SaleDetails" Role="tbl_SaleDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_SaleDetails">
+              <PropertyRef Name="Product_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_SaleD__Produ__7B264821">
+          <End Type="AquaDBModel.tbl_Products" Role="tbl_Products" Multiplicity="1" />
+          <End Type="AquaDBModel.tbl_SaleDetails" Role="tbl_SaleDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_SaleDetails">
+              <PropertyRef Name="Product_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Stock__Pro_i__4B0D20AB">
+          <End Type="AquaDBModel.tbl_Products" Role="tbl_Products" Multiplicity="1" />
+          <End Type="AquaDBModel.tbl_Stockentry" Role="tbl_Stockentry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_Stockentry">
+              <PropertyRef Name="Pro_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_Purch__Vendo__22FF2F51">
+          <End Type="AquaDBModel.tbl_vendor" Role="tbl_vendor" Multiplicity="1" />
+          <End Type="AquaDBModel.tbl_Purchases" Role="tbl_Purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_vendor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_Purchases">
+              <PropertyRef Name="Vendor_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__tbl_SaleD__sales__019E3B86">
+          <End Type="AquaDBModel.tbl_Sales" Role="tbl_Sales" Multiplicity="1" />
+          <End Type="AquaDBModel.tbl_SaleDetails" Role="tbl_SaleDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Sales">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_SaleDetails">
+              <PropertyRef Name="sales_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_SaleD__sales__0B27A5C0">
+          <End Type="AquaDBModel.tbl_Sales" Role="tbl_Sales" Multiplicity="1" />
+          <End Type="AquaDBModel.tbl_SaleDetails" Role="tbl_SaleDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Sales">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_SaleDetails">
+              <PropertyRef Name="sales_id_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_SaleD__sales__7A3223E8">
           <End Type="AquaDBModel.tbl_Sales" Role="tbl_Sales" Multiplicity="1" />
           <End Type="AquaDBModel.tbl_SaleDetails" Role="tbl_SaleDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -693,96 +1003,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tbl_payments">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Customerid_fk" Type="Int32" Nullable="false" />
-          <Property Name="sale_id" Type="Int32" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <Property Name="Comment" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbl_CustomerDetails" Relationship="AquaDBModel.FK__tbl_payme__Custo__10E07F16" FromRole="tbl_payments" ToRole="tbl_CustomerDetails" />
-        </EntityType>
-        <Association Name="FK__tbl_payme__Custo__10E07F16">
-          <End Type="AquaDBModel.tbl_CustomerDetails" Role="tbl_CustomerDetails" Multiplicity="1" />
-          <End Type="AquaDBModel.tbl_payments" Role="tbl_payments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_CustomerDetails">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tbl_payments">
-              <PropertyRef Name="Customerid_fk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="tbl_Purchases">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Vendor_id_fk" Type="Int16" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbl_vendor" Relationship="AquaDBModel.FK__tbl_Purch__Vendo__22FF2F51" FromRole="tbl_Purchases" ToRole="tbl_vendor" />
-        </EntityType>
-        <EntityType Name="tbl_vendor">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VendorName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="VendorNumber" Type="Int64" Nullable="false" />
-          <Property Name="VendorAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbl_Purchases" Relationship="AquaDBModel.FK__tbl_Purch__Vendo__22FF2F51" FromRole="tbl_vendor" ToRole="tbl_Purchases" />
-        </EntityType>
-        <Association Name="FK__tbl_Purch__Vendo__22FF2F51">
-          <End Type="AquaDBModel.tbl_vendor" Role="tbl_vendor" Multiplicity="1" />
-          <End Type="AquaDBModel.tbl_Purchases" Role="tbl_Purchases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_vendor">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tbl_Purchases">
-              <PropertyRef Name="Vendor_id_fk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="tbl_AccountEntries">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Acc_id_fk" Type="Int16" Nullable="false" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="Type" Type="Boolean" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Comment" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbl_accounts" Relationship="AquaDBModel.FK__tbl_Accou__Acc_i__37FA4C37" FromRole="tbl_AccountEntries" ToRole="tbl_accounts" />
-        </EntityType>
-        <EntityType Name="tbl_accounts">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Account_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Balance" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <NavigationProperty Name="tbl_AccountEntries" Relationship="AquaDBModel.FK__tbl_Accou__Acc_i__37FA4C37" FromRole="tbl_accounts" ToRole="tbl_AccountEntries" />
-        </EntityType>
-        <Association Name="FK__tbl_Accou__Acc_i__37FA4C37">
-          <End Type="AquaDBModel.tbl_accounts" Role="tbl_accounts" Multiplicity="1" />
-          <End Type="AquaDBModel.tbl_AccountEntries" Role="tbl_AccountEntries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbl_accounts">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tbl_AccountEntries">
-              <PropertyRef Name="Acc_id_fk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -792,14 +1012,40 @@
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="AquaDBModel.Category">
               <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
                 <ScalarProperty Name="CategortyName" ColumnName="CategortyName" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_AccountEntries">
+            <EntityTypeMapping TypeName="AquaDBModel.tbl_AccountEntries">
+              <MappingFragment StoreEntitySet="tbl_AccountEntries">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Acc_id_fk" ColumnName="Acc_id_fk" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_accounts">
+            <EntityTypeMapping TypeName="AquaDBModel.tbl_accounts">
+              <MappingFragment StoreEntitySet="tbl_accounts">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Account_name" ColumnName="Account_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_CustomerDetails">
             <EntityTypeMapping TypeName="AquaDBModel.tbl_CustomerDetails">
               <MappingFragment StoreEntitySet="tbl_CustomerDetails">
+                <ScalarProperty Name="GSTnumber" ColumnName="GSTnumber" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
                 <ScalarProperty Name="Balance" ColumnName="Balance" />
                 <ScalarProperty Name="City_Town" ColumnName="City_Town" />
                 <ScalarProperty Name="State" ColumnName="State" />
@@ -814,8 +1060,20 @@
           <EntitySetMapping Name="tbl_Employee">
             <EntityTypeMapping TypeName="AquaDBModel.tbl_Employee">
               <MappingFragment StoreEntitySet="tbl_Employee">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
                 <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
                 <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_expensesEntries">
+            <EntityTypeMapping TypeName="AquaDBModel.tbl_expensesEntries">
+              <MappingFragment StoreEntitySet="tbl_expensesEntries">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="Amout" ColumnName="Amout" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Cat_id_fk" ColumnName="Cat_id_fk" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -831,7 +1089,21 @@
           <EntitySetMapping Name="tbl_lookupExpense">
             <EntityTypeMapping TypeName="AquaDBModel.tbl_lookupExpense">
               <MappingFragment StoreEntitySet="tbl_lookupExpense">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
                 <ScalarProperty Name="Expense" ColumnName="Expense" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_payments">
+            <EntityTypeMapping TypeName="AquaDBModel.tbl_payments">
+              <MappingFragment StoreEntitySet="tbl_payments">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="sale_id" ColumnName="sale_id" />
+                <ScalarProperty Name="Customerid_fk" ColumnName="Customerid_fk" />
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -839,6 +1111,7 @@
           <EntitySetMapping Name="tbl_Products">
             <EntityTypeMapping TypeName="AquaDBModel.tbl_Products">
               <MappingFragment StoreEntitySet="tbl_Products">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
                 <ScalarProperty Name="Product_stock" ColumnName="Product_stock" />
                 <ScalarProperty Name="MRP_bottle" ColumnName="MRP_bottle" />
                 <ScalarProperty Name="Piece_box" ColumnName="Piece_box" />
@@ -848,9 +1121,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Purchases">
+            <EntityTypeMapping TypeName="AquaDBModel.tbl_Purchases">
+              <MappingFragment StoreEntitySet="tbl_Purchases">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Vendor_id_fk" ColumnName="Vendor_id_fk" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbl_salary">
             <EntityTypeMapping TypeName="AquaDBModel.tbl_salary">
               <MappingFragment StoreEntitySet="tbl_salary">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="Emp_id_fk" ColumnName="Emp_id_fk" />
@@ -873,6 +1159,7 @@
           <EntitySetMapping Name="tbl_Sales">
             <EntityTypeMapping TypeName="AquaDBModel.tbl_Sales">
               <MappingFragment StoreEntitySet="tbl_Sales">
+                <ScalarProperty Name="isGST" ColumnName="isGST" />
                 <ScalarProperty Name="isDelete" ColumnName="isDelete" />
                 <ScalarProperty Name="customer_id_fk" ColumnName="customer_id_fk" />
                 <ScalarProperty Name="Payment_status_comments" ColumnName="Payment_status_comments" />
@@ -885,9 +1172,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Stockentry">
+            <EntityTypeMapping TypeName="AquaDBModel.tbl_Stockentry">
+              <MappingFragment StoreEntitySet="tbl_Stockentry">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Pro_id_fk" ColumnName="Pro_id_fk" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbl_Vehicle">
             <EntityTypeMapping TypeName="AquaDBModel.tbl_Vehicle">
               <MappingFragment StoreEntitySet="tbl_Vehicle">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="PUC" ColumnName="PUC" />
                 <ScalarProperty Name="Permit" ColumnName="Permit" />
@@ -910,56 +1209,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_payments">
-            <EntityTypeMapping TypeName="AquaDBModel.tbl_payments">
-              <MappingFragment StoreEntitySet="tbl_payments">
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="sale_id" ColumnName="sale_id" />
-                <ScalarProperty Name="Customerid_fk" ColumnName="Customerid_fk" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_Purchases">
-            <EntityTypeMapping TypeName="AquaDBModel.tbl_Purchases">
-              <MappingFragment StoreEntitySet="tbl_Purchases">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Vendor_id_fk" ColumnName="Vendor_id_fk" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbl_vendor">
             <EntityTypeMapping TypeName="AquaDBModel.tbl_vendor">
               <MappingFragment StoreEntitySet="tbl_vendor">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
                 <ScalarProperty Name="VendorAddress" ColumnName="VendorAddress" />
                 <ScalarProperty Name="VendorNumber" ColumnName="VendorNumber" />
                 <ScalarProperty Name="VendorName" ColumnName="VendorName" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_AccountEntries">
-            <EntityTypeMapping TypeName="AquaDBModel.tbl_AccountEntries">
-              <MappingFragment StoreEntitySet="tbl_AccountEntries">
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Acc_id_fk" ColumnName="Acc_id_fk" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_accounts">
-            <EntityTypeMapping TypeName="AquaDBModel.tbl_accounts">
-              <MappingFragment StoreEntitySet="tbl_accounts">
-                <ScalarProperty Name="Balance" ColumnName="Balance" />
-                <ScalarProperty Name="Account_name" ColumnName="Account_name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

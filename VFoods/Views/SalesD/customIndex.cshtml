@@ -1,0 +1,92 @@
+﻿@model IEnumerable<VFoods.tbl_Sales>
+
+@{
+    ViewBag.Title = "customIndex ";
+}
+
+<h2>Produts Listed</h2>
+
+<p>
+
+
+    <a href="@Url.Action("AddNewOrder", "SalesD")" class="btn btn-primary">
+
+        <span>
+            <i class="fas fa-plus-circle"></i>
+
+        </span>
+        <span>
+            <strong>Add new sale </strong>
+        </span>
+    </a>
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_of_purchase)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vehicle_no)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Transporter_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total_bill)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Amount_due)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_CustomerDetails.Customer_name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Date_of_purchase)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tbl_CustomerDetails.Customer_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Vehicle_no)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Total_bill)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Amount_due)
+    </td>
+    <td>
+
+        "
+    <td>
+        <a class='btn btn-info' href='/SalesD/Details?orderId=" + item.id + "'>Details</a>
+        <a href="@Url.Action("Details", "SalesD", new { id = item.id })" class="btn btn-primary">
+            <span>
+                <i class="fas fa-edit"></i>
+            </span>
+        </a> |
+        <a class='btn btn-danger' href='/SalesD/Delete?orderId=" + item.id + "'>Delete</a>
+        <a class='btn btn-success' href='/SalesD/Whatsapp?orderId=" + item.id + "'>Whatsapp</a>
+    </td>
+
+
+
+</tr>
+    }
+
+</table>
+
+

@@ -1,0 +1,114 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+<h2 style="text-align:center">NON GST orders</h2>
+
+
+
+<a href="@Url.Action("AddNewOrder", "NonGSTsales")" class="btn btn-primary">
+
+    <span>
+        <i class="fas fa-plus-circle"></i>
+
+    </span>
+    <span>
+        <strong>New Sale</strong>
+    </span>
+</a>
+
+
+
+<table class="table-striped" id="tblOrder" style="display:none">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Order Date</th>
+            <th>Transporter Name</th>
+            <th>Comments</th>
+
+            <th>Total Amount</th>
+            <th>Amount Due</th>
+
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody id="tBodyOrder"></tbody>
+
+</table>
+
+
+
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "GET",
+                url: "/NonGSTsales/GetAllOrders/",
+                cache: false,
+                success: function (data) {
+                   
+                    $('#tBodyOrder').empty();
+                    var tr;
+                    for (var i = 0; i < data.length; i++) {
+                        tr = $('<tr/>');
+
+                        tr.append("<td>" + data[i].id + "</td>");
+
+                        var str = data[i].Date_of_purchase;
+
+
+                        var txt = str.toString();;
+                        var numb = txt.match(/\d/g);
+                        numb = numb.join("");
+                        var data1 = { "date_created": numb };
+                        var date1 = new Date(parseInt(data1.date_created));
+
+                        //var fdate = (date1.getMonth() + 1) + '/' + date1.getDate() + '/' + date1.getFullYear()
+
+                        var fdate = date1.getDate() + '/ ' + (date1.getMonth() + 1) + '/ ' + date1.getFullYear()
+
+
+                        tr.append("<td>" + fdate + "</td>");
+                        tr.append("<td>" + data[i].Transporter_name + "</td>");
+                        tr.append("<td>" + data[i].Payment_status_comments + "</td>");
+                   
+                        tr.append("<td>" + data[i].Total_bill + "</td>");
+                        tr.append("<td>" + data[i].Amount_due + "</td>");
+
+
+
+
+                        tr.append("<td>" +
+                            "<a class='btn btn-info' href='/NonGSTsales/Details?orderId=" + data[i].id + "'>Details</a>  "
+
+                            + "<a class='btn btn-danger' href='/NonGSTsales/Delete?orderId=" + data[i].id + "'>Delete</a>"
+
+                            + "<a class='btn btn-success' href='/NonGSTsales/Whatsapp?orderId=" + data[i].id + "'>Whatsapp</a>"
+
+                            + "</td>");
+
+                        $('#tblOrder tbody').append(tr);
+                    }
+                },
+                error: function () { }
+            })
+
+            $('#tblOrder').DataTable(
+                {
+                    paging: false,
+                    
+                    ordering: false,
+                    searching: false,
+                    info: false,
+                   
+                });
+            $('#tblOrder').show();
+        });
+    </script>
+
+   
+}

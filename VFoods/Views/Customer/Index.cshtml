@@ -41,6 +41,9 @@
             @Html.DisplayNameFor(model => model.Phone_number)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.GSTnumber)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
         <th>
@@ -52,54 +55,63 @@
         <th>
             @Html.DisplayNameFor(model => model.Balance)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GSTnumber)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Account_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Customer_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone_number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City_Town)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Balance)
-        </td>
-        <td>
-            <a href="@Url.Action("Edit", "Customer", new { id = item.Id })" class="btn btn-primary">
-                <span>
-                    <i class="fas fa-edit"></i>
-                </span>
-            </a> |
-            <a href="@Url.Action("Details", "Customer", new { id = item.Id })" class="btn btn-success">
-                <span>
-                    <i class="fas fa-list"></i>
-                </span>
-            </a> |
-            <a href="@Url.Action("Delete", "Customer", new { id = item.Id })" class="btn btn-danger">
-                <span>
-                    <i class="fas fa-trash-alt"></i>
-                </span>
-            </a> |
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Account_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Customer_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Phone_number)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GSTnumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Address)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.State)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.City_Town)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Balance)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GSTnumber)
+    </td>
+    <td>
+        <a href="@Url.Action("Edit", "Customer", new { id = item.Id })" class="btn btn-primary">
+            <span>
+                <i class="fas fa-edit"></i>
+            </span>
+        </a> |
+        <a href="@Url.Action("Details", "Customer", new { id = item.Id })" class="btn btn-success">
+            <span>
+                <i class="fas fa-list"></i>
+            </span>
+        </a> |
+        <a href="@Url.Action("Delete", "Customer", new { id = item.Id })" class="btn btn-danger">
+            <span>
+                <i class="fas fa-trash-alt"></i>
+            </span>
+        </a> |
 
-            <a href="@Url.Action("WhatsappReminder", "Customer", new { id = item.Id })" class="btn btn-success">
-                Reminder
-            </a>
-        </td>
-    </tr>
+        <a href="@Url.Action("WhatsappReminder", "Customer", new { id = item.Id })" class="btn btn-success">
+            Reminder
+        </a>
+    </td>
+</tr>
 }
 
 </table>

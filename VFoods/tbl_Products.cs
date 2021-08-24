@@ -18,6 +18,7 @@ namespace VFoods
         public tbl_Products()
         {
             this.tbl_SaleDetails = new HashSet<tbl_SaleDetails>();
+            this.tbl_Stockentry = new HashSet<tbl_Stockentry>();
         }
     
         public int Id { get; set; }
@@ -26,8 +27,11 @@ namespace VFoods
         public short Piece_box { get; set; }
         public short MRP_bottle { get; set; }
         public int Product_stock { get; set; }
+        public Nullable<bool> isDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_SaleDetails> tbl_SaleDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_Stockentry> tbl_Stockentry { get; set; }
     }
 }

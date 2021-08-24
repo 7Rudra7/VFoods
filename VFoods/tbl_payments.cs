@@ -20,6 +20,7 @@ namespace VFoods
         public Nullable<int> sale_id { get; set; }
         public decimal Amount { get; set; }
         public string Comment { get; set; }
+        public Nullable<bool> isDelete { get; set; }
     
         public virtual tbl_CustomerDetails tbl_CustomerDetails { get; set; }
     }

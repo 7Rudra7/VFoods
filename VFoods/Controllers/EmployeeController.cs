@@ -18,7 +18,8 @@ namespace VFoods.Controllers
         // GET: Employee
         public ActionResult Index()
         {
-            return View(db.tbl_Employee.ToList());
+            var tbl_emp = db.tbl_Employee.Where(x => x.isDelete != true).ToList();
+            return View(tbl_emp);
         }
 
         // GET: Employee/Details/5
@@ -111,7 +112,9 @@ namespace VFoods.Controllers
         public ActionResult DeleteConfirmed(short id)
         {
             tbl_Employee tbl_Employee = db.tbl_Employee.Find(id);
-            db.tbl_Employee.Remove(tbl_Employee);
+            //db.tbl_Employee.Remove(tbl_Employee);
+            tbl_Employee.isDelete = true;
+            db.Entry(tbl_Employee).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

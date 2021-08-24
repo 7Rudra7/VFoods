@@ -25,14 +25,14 @@ namespace VFoods.Controllers
         public ActionResult Index(string searching)
         {
             ViewData["GetCustomerDetails"] = searching;
-            var tbl_CustomerDetails = db.tbl_CustomerDetails.ToList();
+            var tbl_CustomerDetails = db.tbl_CustomerDetails.Where(x=> x.isDelete!=true).ToList();
 
             if (!string.IsNullOrEmpty(searching))
             {
-                var tbl_CustomerDetails1 = db.tbl_CustomerDetails.Where(x=> x.Customer_name.Contains(searching) || x.Account_name.Contains(searching) || x.City_Town.Contains(searching));
+                var tbl_CustomerDetails1 = db.tbl_CustomerDetails.Where(x=> x.Customer_name.Contains(searching) || x.Account_name.Contains(searching) || x.City_Town.Contains(searching) );
 
-                
-                if (tbl_CustomerDetails1.Count() == 0)
+                var tbl_CustomerDetails2 = tbl_CustomerDetails1.Where(x =>  x.isDelete != true);
+                if (tbl_CustomerDetails2.Count() == 0)
                 {
                     ViewBag.search = "No records found";
                     return View(tbl_CustomerDetails.ToList());
@@ -40,7 +40,7 @@ namespace VFoods.Controllers
                 else
                 {
                     ViewBag.search = "Search results";
-                    return View(tbl_CustomerDetails1.ToList()); }
+                    return View(tbl_CustomerDetails2.ToList()); }
                 
             }
 
@@ -77,7 +77,7 @@ namespace VFoods.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Account_name,Customer_name,Phone_number,Address,State,City_Town,Balance")] tbl_CustomerDetails tbl_CustomerDetails)
+        public ActionResult Create([Bind(Include = "Id,Account_name,Customer_name,Phone_number,Address,State,City_Town,Balance,GSTnumber")] tbl_CustomerDetails tbl_CustomerDetails)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +109,7 @@ namespace VFoods.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Account_name,Customer_name,Phone_number,Address,State,City_Town,Balance")] tbl_CustomerDetails tbl_CustomerDetails)
+        public ActionResult Edit([Bind(Include = "Id,Account_name,Customer_name,Phone_number,Address,State,City_Town,Balance,GSTnumber")] tbl_CustomerDetails tbl_CustomerDetails)
         {
             if (ModelState.IsValid)
             {
@@ -141,7 +141,9 @@ namespace VFoods.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             tbl_CustomerDetails tbl_CustomerDetails = db.tbl_CustomerDetails.Find(id);
-            db.tbl_CustomerDetails.Remove(tbl_CustomerDetails);
+            tbl_CustomerDetails.isDelete = true;
+            //db.tbl_CustomerDetails.Remove(tbl_CustomerDetails);
+            db.Entry(tbl_CustomerDetails).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

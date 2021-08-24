@@ -28,7 +28,8 @@ namespace VFoods
         public decimal Amount_due { get; set; }
         public string Payment_status_comments { get; set; }
         public int customer_id_fk { get; set; }
-        public byte isDelete { get; set; }
+        public bool isDelete { get; set; }
+        public Nullable<bool> isGST { get; set; }
     
         public virtual tbl_CustomerDetails tbl_CustomerDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

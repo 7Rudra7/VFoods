@@ -19,7 +19,7 @@ namespace VFoods
         public int Product_id_fk { get; set; }
         public short Product_qty { get; set; }
         public decimal Product_total_price { get; set; }
-        public byte isDelete { get; set; }
+        public bool isDelete { get; set; }
     
         public virtual tbl_Products tbl_Products { get; set; }
         public virtual tbl_Sales tbl_Sales { get; set; }

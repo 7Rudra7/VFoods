@@ -9,7 +9,8 @@ using VFoods;
 using VFoods.Models;
 using System.Data.Entity.Validation;
 using System.Net;
-
+using PagedList;
+using PagedList.Mvc;
 namespace VFoods.Controllers
 {
     [Authorize]
@@ -17,9 +18,20 @@ namespace VFoods.Controllers
     {
         AquaDBEntities1 db = new AquaDBEntities1();
         // GET: SalesD
+
+        public ActionResult customIndex()
+        {
+            var tbl_Sales = db.tbl_Sales.Where(x => x.isDelete != true && x.isGST==true).ToList();
+
+            return View(tbl_Sales);
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var tbl_Sales = db.tbl_Sales.Where(x => x.isDelete != true && x.isGST == true).ToList();
+
+
+            return View(tbl_Sales);
         }
 
         public JsonResult GetAllOrders()
@@ -28,7 +40,8 @@ namespace VFoods.Controllers
             List<tbl_Sales> lstOrders = new List<tbl_Sales>();
             try
             {
-                lstOrders = db.tbl_Sales.Where(a => a.isDelete != 1).OrderByDescending(a=>a.id).ToList();
+                lstOrders = db.tbl_Sales.Where(a => a.isDelete != true && a.isGST==true).OrderByDescending(a=>a.id).ToList();
+               
             }
             catch (Exception ex)
             {
@@ -63,15 +76,16 @@ namespace VFoods.Controllers
             List<tbl_Vehicle> lstVehi = new List<tbl_Vehicle>();
             try
             {
-                lstCust = db.tbl_CustomerDetails.Where(a => a.Id >0).ToList();
+                lstCust = db.tbl_CustomerDetails.Where(a => a.Id >0 && a.isDelete!=true).ToList();
+
 
                 ViewBag.Customers = lstCust;
 
-                lstProd = db.tbl_Products.Where(a => a.Id > 0).ToList();
+                lstProd = db.tbl_Products.Where(a => a.Id > 0 && a.isDelete != true).ToList();
 
                 ViewBag.Products = lstProd;
 
-                lstVehi = db.tbl_Vehicle.Where(a => a.Id > 0).ToList();
+                lstVehi = db.tbl_Vehicle.Where(a => a.Id > 0 && a.isDelete != true).ToList();
 
                 ViewBag.Vehicles = lstVehi;
             }
@@ -196,8 +210,10 @@ namespace VFoods.Controllers
                 var mul = 18.0 / 100;
                 var gst = (decimal)mul * data.TotalAmount;
                 var Balance1 = db.tbl_CustomerDetails.Where(a => a.Id == data.CustomerID).FirstOrDefault();
-               
-                var TotalBalance = Balance1.Balance + data.TotalAmount + gst;
+
+
+                var WithGST = data.TotalAmount / 0.82M;
+                var TotalBalance = Balance1.Balance + WithGST;
 
 
                 if (orderId > 0) {
@@ -217,11 +233,12 @@ namespace VFoods.Controllers
                     tt.Transporter_name = data.TransporterName;
                     
 
-                    tt.Total_bill = data.TotalAmount + gst;
-                    tt.Amount_due = data.TotalAmount + gst;
+                    tt.Total_bill = data.TotalAmount / 0.82M; 
+                    tt.Amount_due = data.TotalAmount / 0.82M;
                     tt.Payment_status_comments = data.Comments;
                     tt.customer_id_fk = data.CustomerID;
-                    tt.isDelete = 0;
+                    tt.isDelete = false;
+                    tt.isGST = true;
                     
                     db.tbl_Sales.Add(tt);
                     int count = data.lstOrderDetails.Count;
@@ -232,7 +249,7 @@ namespace VFoods.Controllers
                         td.Product_id_fk = data.lstOrderDetails[i].Product_id_fk;
                         td.Product_qty = data.lstOrderDetails[i].Product_qty;
                         td.Product_total_price = data.lstOrderDetails[i].Product_total_price;
-                        td.isDelete = 0;
+                        td.isDelete = false;
                         db.tbl_SaleDetails.Add(td);
                         
                         db.SaveChanges();
@@ -279,11 +296,11 @@ namespace VFoods.Controllers
 
             try
             {
-                lstCust  = db.tbl_CustomerDetails.Where(a => a.Id > 0).ToList();
+                lstCust  = db.tbl_CustomerDetails.Where(a => a.Id > 0 && a.isDelete != true).ToList();
 
                 ViewBag.Customers = lstCust;
 
-                lstProd  = db.tbl_Products.Where(a => a.Id > 0).ToList();
+                lstProd  = db.tbl_Products.Where(a => a.Id > 0 && a.isDelete!=true).ToList();
 
                 ViewBag.Products = lstProd;
 
@@ -357,7 +374,7 @@ namespace VFoods.Controllers
             tbl_SaleDetails tsd = db.tbl_SaleDetails.Find(orderId);
 
 
-            ts.isDelete = 1;
+            ts.isDelete = true;
             db.SaveChanges();
 
             var Balance1 = db.tbl_CustomerDetails.Where(a => a.Id == ts.customer_id_fk).FirstOrDefault();
@@ -368,7 +385,7 @@ namespace VFoods.Controllers
             tc.Balance = TotalBalance;
             db.SaveChanges();
 
-            tsd.isDelete = 1;
+            tsd.isDelete = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

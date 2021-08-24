@@ -14,7 +14,17 @@ namespace VFoods
     
     public partial class Category
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Category()
+        {
+            this.tbl_expensesEntries = new HashSet<tbl_expensesEntries>();
+        }
+    
         public int CategoryID { get; set; }
         public string CategortyName { get; set; }
+        public Nullable<bool> isdelete { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_expensesEntries> tbl_expensesEntries { get; set; }
     }
 }

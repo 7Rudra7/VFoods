@@ -19,8 +19,8 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44357</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -55,6 +55,12 @@
       <HintPath>..\..\..\..\Desktop\Vishal Foods\dll\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -140,16 +146,21 @@
     <Compile Include="Controllers\AccountEntriesController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BaccountsController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\expensesEntriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IActionResult.cs" />
+    <Compile Include="Controllers\InsightsController.cs" />
+    <Compile Include="Controllers\NonGSTsalesController.cs" />
     <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\PurchasesController.cs" />
     <Compile Include="Controllers\SalaryController.cs" />
     <Compile Include="Controllers\SalesDController.cs" />
+    <Compile Include="Controllers\StockentryController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -187,6 +198,9 @@
     <Compile Include="tbl_Employee.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbl_expensesEntries.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbl_Login.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -211,6 +225,9 @@
     <Compile Include="tbl_Sales.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbl_Stockentry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbl_Vehicle.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -230,6 +247,7 @@
     <Content Include="Content\Choosen\chosen-sprite.png" />
     <Content Include="Content\Choosen\chosen.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -473,6 +491,29 @@
     <Content Include="Views\AccountEntries\Edit.cshtml" />
     <Content Include="Views\AccountEntries\Index.cshtml" />
     <Content Include="Views\Customer\WhatsappReminder.cshtml" />
+    <Content Include="Views\SalesD\customIndex.cshtml" />
+    <Content Include="Views\Stockentry\Create.cshtml" />
+    <Content Include="Views\Stockentry\Delete.cshtml" />
+    <Content Include="Views\Stockentry\Details.cshtml" />
+    <Content Include="Views\Stockentry\Edit.cshtml" />
+    <Content Include="Views\Stockentry\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\expensesEntries\Create.cshtml" />
+    <Content Include="Views\expensesEntries\Delete.cshtml" />
+    <Content Include="Views\expensesEntries\Details.cshtml" />
+    <Content Include="Views\expensesEntries\Edit.cshtml" />
+    <Content Include="Views\expensesEntries\Index.cshtml" />
+    <Content Include="Views\NonGSTsales\AddNewOrder.cshtml" />
+    <Content Include="Views\NonGSTsales\Whatsapp.cshtml" />
+    <Content Include="Views\NonGSTsales\Index.cshtml" />
+    <Content Include="Views\NonGSTsales\Details.cshtml" />
+    <Content Include="Views\NonGSTsales\Delete.cshtml" />
+    <Content Include="Views\NonGSTsales\customIndex.cshtml" />
+    <Content Include="Views\Insights\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -511,6 +552,8 @@
           <DevelopmentServerPort>55859</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>https://localhost:44357/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44357/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -30,6 +30,7 @@ namespace VFoods
         public System.DateTime Permit { get; set; }
         public System.DateTime PUC { get; set; }
         public string Comments { get; set; }
+        public Nullable<bool> isDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_Sales> tbl_Sales { get; set; }

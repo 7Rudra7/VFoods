@@ -24,6 +24,7 @@ namespace VFoods
         public string VendorName { get; set; }
         public long VendorNumber { get; set; }
         public string VendorAddress { get; set; }
+        public Nullable<bool> isDelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_Purchases> tbl_Purchases { get; set; }

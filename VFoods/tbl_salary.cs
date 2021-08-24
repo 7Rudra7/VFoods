@@ -18,6 +18,7 @@ namespace VFoods
         public short Emp_id_fk { get; set; }
         public int Amount { get; set; }
         public System.DateTime Date { get; set; }
+        public Nullable<bool> isDelete { get; set; }
     
         public virtual tbl_Employee tbl_Employee { get; set; }
     }

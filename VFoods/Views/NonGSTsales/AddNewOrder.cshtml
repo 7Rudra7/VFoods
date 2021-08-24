@@ -1,0 +1,343 @@
+﻿
+<h2>NON gst sale</h2>
+
+@{ ViewBag.Title = "NON gst sale";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    /* Zebra striping */
+    tr:nth-of-type(odd) {
+        background: #eee;
+    }
+
+    th {
+        background: #333;
+        color: white;
+        font-weight: bold;
+    }
+
+    td, th {
+        padding: 6px;
+        border: 1px solid #ccc;
+        text-align: left;
+    }
+
+    /*th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }*/
+</style>
+
+
+
+
+<div class="form-horizontal">
+
+    <form id="AddProductForm">
+        <div class="form-group">
+            @Html.Label("Customer Name", new { @class = "control-label col-md-2" })
+            <div class="col-md-10" id="FullName" disabled="false">
+                @Html.DropDownList("CustomerID", new SelectList(ViewBag.Customers, "Id", "Customer_name"), "Please select", new { @class = "form-control", required = "required"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Vehicle number", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("VehicleNum", new SelectList(ViewBag.Vehicles, "Id", "Vehicle_number"), "Please select", new { @class = "form-control", required = "required" })
+
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Transporter Name", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" id="TransporterName" type="text" required />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Comments", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" id="Comments" type="text" required />
+            </div>
+        </div>
+        <br>
+        <br>
+
+        <div class="form-group">
+            @Html.Label("Product Name", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductCode", new SelectList(ViewBag.Products, "Id", "Product_name"), "Please select", new { @class = "form-control", required = "required" })
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.Label("Price / Rate ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="price" name="price" type="number" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Quantity", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Qty" name="Qty" type="number" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-10">
+                <input id="btnAddProduct" type="button" value="Add Product" class="btn btn-success" required />
+            </div>
+        </div>
+
+
+
+    </form>
+
+
+   
+
+    <table id="tblProductsInOrder" style="display:none">
+        <thead>
+            <tr>
+                <th style="display:none">Product Code</th>
+                <th>Product Name</th>
+                <th>Unit</th>
+                <th>Rate</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div>
+        <span style="text-align:right">
+            <p>Total Quantity:</p>
+            <p id="tQty">0</p>
+
+            <p>Total Amount:</p>
+            <p id="tAmt">0.00</p>
+        </span>
+    </div>
+
+    <br />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="btnPlaceOrder" type="button" value="Place this order" class="btn btn-primary pull-right" />
+        </div>
+    </div>
+</div>
+
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#btnAddProduct").click(function () {
+            var validForm = false;
+            //console.log("in dis");
+           // $("#FullName").attr('disabled', true);
+            validForm = $("#AddProductForm").valid();
+
+
+            if (validForm) {
+                var pCode = $("#ProductCode").val();
+                var pQty = $("#Qty").val();
+               // var vCode = $("#VehicleNum").val();
+                $.ajax({
+                    type: "GET",
+                    url: "/Products/GetProductByCode?pCode=" + pCode,
+                    cache: false,
+                    success: function (data) {
+                        //alert(JSON.stringify(data));
+                        //$('#tblProductsInOrder tbody').empty();
+
+                        var isProductFound = false;
+
+                        $('#tblProductsInOrder .tdPCode').each(function () {
+                            //var thisQty = $(this).find(".tdQty").html()
+                            thisPCode = $(this).html();
+
+                            if (pCode == thisPCode) {
+                                var thisQty = parseInt($(this).closest('tr').find(".tdQty").html());
+                                var thisAmt = parseInt($(this).closest('tr').find(".tdAmt").html());
+                                
+                                $(this).closest('tr').find(".tdQty").html(parseInt(thisQty) + parseInt(pQty));
+
+                                var updatedQty = parseInt($(this).closest('tr').find(".tdQty").html());
+
+                                $(this).closest('tr').find(".tdAmt").html(parseFloat(parseInt(updatedQty) * parseFloat(data.Rate)));
+
+                                var updatedAmt = parseInt($(this).closest('tr').find(".tdAmt").html());
+
+                                //Total Quantity
+                                var tQty = parseInt($("#tQty").html());
+                                tQty = parseInt(tQty - parseInt(thisQty));
+                                tQty = parseInt(tQty) + parseInt(updatedQty);
+                                $("#tQty").html(tQty);
+
+
+                                //Total Amount
+                                var tAmt = parseFloat($("#tAmt").html());
+                                tAmt = parseFloat(tAmt - parseFloat(thisAmt));
+                                tAmt = parseFloat(tAmt + parseFloat(updatedAmt));
+                                $("#tAmt").html(tAmt);
+
+
+                                isProductFound = true;
+                            }
+
+                            //tQty = tQty + parseInt(thisQty);
+                        });
+
+                        if (!isProductFound) {
+
+                            var tr;
+
+                            tr = $('<tr/>');
+                            var rate = $("#price").val();
+                       
+
+
+
+                            tr.append("<td class='tdPCode' style='display:none'>" + data.Id + "</td>");
+                            tr.append("<td>" + data.Product_name + "</td>");
+                            
+                            tr.append("<td>" + data.Piece_box + "</td>");
+                            tr.append("<td>" + rate + "</td>");
+
+                            var qty = $("#Qty").val();
+                            
+                            tr.append("<td class='tdQty'>" + qty + "</td>");
+
+                            var amount = rate * qty;
+
+                            tr.append("<td class='tdAmt'>" + amount + "</td>");
+
+                            $('#tblProductsInOrder tbody').append(tr);
+
+                            $("#tblProductsInOrder").css("display", "block");
+
+
+                            //Total Quantity
+                            var tQty = parseInt($("#tQty").html()) + parseInt(qty);
+                            $("#tQty").html(tQty);
+
+
+                            //Total Amount
+                            var tAmt = parseFloat($("#tAmt").html()) + parseFloat(amount);
+                            $("#tAmt").html(tAmt);
+
+
+                            //$('#tblProductsInOrder .tdQty').each(function () {
+                            //    //var thisQty = $(this).find(".tdQty").html()
+                            //    thisQty = $(this).html();
+                            //    tQty = tQty + parseInt(thisQty);
+                            //});
+
+                        }
+                    },
+                    error: function () { }
+                })
+            }
+        });
+
+        $("#btnPlaceOrder").click(function () {
+
+            var totalQty = parseInt($("#tQty").html());
+            var totalAmt = parseFloat($("#tAmt").html());
+
+            var rowCount = parseInt($("#tblProductsInOrder > tbody > tr").length);
+
+            if ((totalQty < 0 || totalQty == "") || totalAmt == 0 || totalAmt == "" || rowCount == 0 || rowCount == "") {
+                alert("Please add products.");
+            }
+            else {
+                var lstOrderDetails = [];
+
+                $('#tblProductsInOrder tbody tr').each(function () {
+                    var thisPCode = $(this).find(".tdPCode").html();
+                    var thisPQty = $(this).find(".tdQty").html();
+                    var thisAmt = $(this).find(".tdAmt").html();
+
+                    lstOrderDetails.push({
+                        "Product_id_fk": thisPCode,
+                        "Product_qty": thisPQty,
+                        "Product_total_price": thisAmt
+                    });
+                });
+
+                var jsonData =
+                {
+                    "CustomerID": $("#CustomerID").val(),
+                    "VehicleNum": $("#VehicleNum").val(),
+                    "TransporterName": $("#TransporterName").val(),
+                    "Comments": $("#Comments").val(),
+                
+                    "lstOrderDetails": lstOrderDetails,
+                    "TotalQty": $("#tQty").html(),
+                    "TotalAmount": $("#tAmt").html()
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/NonGSTsales/SubmitNewOrder",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(jsonData),
+                    cache: false,
+                    success: function (data) {
+                        alert('Order Added Successfully.');
+                        window.location.href = "/NonGSTsales";
+                    },
+                    error: function () { }
+                });
+
+                
+            }
+
+
+
+        });
+
+       
+    </script>
+
+    <style>
+        #c {
+            page-break-after: avoid;
+        }
+
+        #d {
+            page-break-before: avoid;
+        }
+        </style>
+    <script>
+        //$(function () {
+        //    $("#Cus").chosen();
+        //});
+        //$(function () {
+        //    $("#Veh").chosen();
+        //});
+        //$(function () {
+        //    $("#Pro").chosen();
+        //});
+        </script>
+
+
+}
+

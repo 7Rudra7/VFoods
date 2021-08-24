@@ -63,6 +63,9 @@
 
         @Model.First().tbl_Sales.tbl_CustomerDetails.Address , @Model.First().tbl_Sales.tbl_CustomerDetails.City_Town , @Model.First().tbl_Sales.tbl_CustomerDetails.State
         <br>
+        <b> Customer GST No :</b>
+        @Model.First().tbl_Sales.tbl_CustomerDetails.GSTnumber
+        <br>
         <b> Total Outstanding Balance :</b>
         @Model.First().tbl_Sales.tbl_CustomerDetails.Balance
 
@@ -131,7 +134,7 @@
 
         <b> Total quantity :</b>@Model.Sum(i => i.Product_qty)
         <br>
-        <b> Sub. total :</b>  @Model.Sum(i => i.Product_total_price)
+        <b> Sub. total :</b>  @Model.Sum(i => i.Product_total_price) 
         <br>
 
 
@@ -139,7 +142,7 @@
         <b>Total :</b><p id="totalrs"></p><br>
 
         <br>
-        <b> Comments :</b>@Model.First().tbl_Sales.Payment_status_comments<br><br><br><br>
+        @*<b> Comments :</b>@Model.First().tbl_Sales.Payment_status_comments<br><br><br><br>*@
 
         <font face="Comic sans MS" size="3">Vishal Foods </font><br />
         <b> Company PAN no.</b> <br>
@@ -147,10 +150,10 @@
 
         <script>
             document.getElementById("gst").innerHTML = "<b>GST 18% : </b>"
-            document.getElementById("gst").innerHTML += @Model.Sum(i => i.Product_total_price) * 18 / 100;
+            document.getElementById("gst").innerHTML += @Model.Sum(i => i.Product_total_price) * (1/0.82) * (0.18);
             //console.log(gst);
-
-            document.getElementById("totalrs").innerHTML = ( @Model.Sum(i => i.Product_total_price) * 18 / 100) + @Model.Sum(i => i.Product_total_price);
+            //( at the rate here Model.Sum(i => i.Product_total_price) * 18 / 100) +
+            document.getElementById("totalrs").innerHTML =  @Model.Sum(i => i.Product_total_price)* (1 / 0.82);
             document.getElementById("totalrs").innerHTML += " /-"
             //console.log(totalrs);
 

@@ -90,7 +90,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="Customerid_fk" Type="int" Nullable="false" />
-          <Property Name="sale_id" Type="int" />
           <Property Name="Amount" Type="decimal" Precision="9" Scale="2" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="25" />
           <Property Name="isDelete" Type="bit" />
@@ -637,8 +636,8 @@
           </Key>
           <Property Name="Emp_ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Emp_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbl_salary" Relationship="AquaDBModel.FK__tbl_salar__Emp_i__2BFE89A6" FromRole="tbl_Employee" ToRole="tbl_salary" />
           <Property Name="isDelete" Type="Boolean" />
+          <NavigationProperty Name="tbl_salary" Relationship="AquaDBModel.FK__tbl_salar__Emp_i__2BFE89A6" FromRole="tbl_Employee" ToRole="tbl_salary" />
         </EntityType>
         <EntityType Name="tbl_expensesEntries">
           <Key>
@@ -675,7 +674,6 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Customerid_fk" Type="Int32" Nullable="false" />
-          <Property Name="sale_id" Type="Int32" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
           <Property Name="Comment" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="isDelete" Type="Boolean" />
@@ -1101,7 +1099,6 @@
                 <ScalarProperty Name="isDelete" ColumnName="isDelete" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="sale_id" ColumnName="sale_id" />
                 <ScalarProperty Name="Customerid_fk" ColumnName="Customerid_fk" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="id" ColumnName="id" />

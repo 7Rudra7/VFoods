@@ -211,9 +211,10 @@
 
                             tr = $('<tr/>');
                             var rate = $("#price").val();
-                            var GST = 0.18 * rate;
+                            rate = rate / 1.18;
+                            //var GST = 0.18 * rate;
 
-                            var rate = rate - GST;
+                            var rate1 = rate.toFixed(2);
 
 
 
@@ -221,7 +222,7 @@
                             tr.append("<td>" + data.Product_name + "</td>");
                             
                             tr.append("<td>" + data.Piece_box + "</td>");
-                            tr.append("<td>" + rate + "</td>");
+                            tr.append("<td>" + rate1 + "</td>");
 
                             var qty = $("#Qty").val();
                             
@@ -229,7 +230,9 @@
 
                             var amount = rate * qty;
 
-                            tr.append("<td class='tdAmt'>" + amount + "</td>");
+                            var amount1 = amount.toFixed(2);
+
+                            tr.append("<td class='tdAmt'>" + amount1 + "</td>");
 
                             $('#tblProductsInOrder tbody').append(tr);
 

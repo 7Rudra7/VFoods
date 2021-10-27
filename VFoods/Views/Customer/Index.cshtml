@@ -55,9 +55,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Balance)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GSTnumber)
-        </th>
+      
         <th></th>
     </tr>
 
@@ -87,9 +85,7 @@
     <td>
         @Html.DisplayFor(modelItem => item.Balance)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.GSTnumber)
-    </td>
+
     <td>
         <a href="@Url.Action("Edit", "Customer", new { id = item.Id })" class="btn btn-primary">
             <span>

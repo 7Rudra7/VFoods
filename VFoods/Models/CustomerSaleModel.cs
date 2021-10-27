@@ -5,7 +5,7 @@ using System.Web;
 
 namespace VFoods.Models
 {
-    public class SalesOrderViewModel
+    public class CustomerSaleModel
     {
         public IQueryable<tbl_CustomerDetails> Customers { get; set; }
         public List<tbl_CustomerDetails> Customer { get; set; }
@@ -17,3 +17,5 @@ namespace VFoods.Models
         public tbl_Products Product { get; set; }
     }
 }
+
+

@@ -148,16 +148,16 @@
         <b> Company PAN no.</b> <br>
         AALFV006A
 
-        <script>
-            document.getElementById("gst").innerHTML = "<b>GST 18% : </b>"
-            document.getElementById("gst").innerHTML += @Model.Sum(i => i.Product_total_price) * (1/0.82) * (0.18);
+                                <script>
+                                    document.getElementById("gst").innerHTML = "<b>GST 18% : </b>"
+                                    document.getElementById("gst").innerHTML += ((@Model.Sum(i => i.Product_total_price) * 1.18) - (@Model.Sum(i => i.Product_total_price))).toFixed(2);
             //console.log(gst);
             //( at the rate here Model.Sum(i => i.Product_total_price) * 18 / 100) +
-            document.getElementById("totalrs").innerHTML =  @Model.Sum(i => i.Product_total_price)* (1 / 0.82);
+            document.getElementById("totalrs").innerHTML = (@Model.Sum(i => i.Product_total_price)* 1.18).toFixed(2);
             document.getElementById("totalrs").innerHTML += " /-"
             //console.log(totalrs);
 
-        </script>
+                                </script>
     </div>
 </div>
     </div>

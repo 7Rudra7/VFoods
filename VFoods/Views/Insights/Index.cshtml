@@ -1,14 +1,42 @@
-﻿@model IEnumerable<VFoods.tbl_CustomerDetails>
-@{
-    ViewBag.Title = "Index";
+﻿@model VFoods.Models.SalesOrderViewModel
+@{ ViewBag.Title = "Index";
 }
 
-<h2>Summary</h2>
+<h2>Daily Report Date : @DateTime.Now</h2>
 
-<i class="fas fa-money-bill-wave"></i>  Total Outstanding Balance : 
-<div style="color:red">
+<i class="fas fa-money-bill-wave"></i> Total Outstanding Balance   : &nbsp;
+<span style="color:#981313">
+
     &#x20b9;
-    @Model.Sum(i => i.Balance)
-</div>
+    @Model.Customer.Sum(i => i.Balance)
+
+</span>
+
+<br>
+<i class="fas fa-money-bill-wave"></i>  Total Sales Today      : &nbsp;
+<span style="color:green">
+    @if (Model != null)
+    {
+        <span>
+            &#x20b9;
+            @Model.Sales.Sum(i => i.Total_bill)
+        </span>
+    }
+    else
+    {
+        <div> No sales for today .</div>
+    }
+
+</span>
+<br>
+<i class="fas fa-money-bill-wave"></i>  Total Payments received today: &nbsp;
+<span style="color:green">
+
+    &#x20b9;
+    @Model.Payments.Sum(i => i.Amount)
+
+</span>
+
+
 
 

@@ -207,12 +207,14 @@ namespace VFoods.Controllers
             try
             {
                  orderId = (int)db.tbl_Sales.Max(a => a.id) + 1;
-                var mul = 18.0 / 100;
-                var gst = (decimal)mul * data.TotalAmount;
+               // var mul = 18.0 / 100;
+                //below
+                var withoutGST = data.TotalAmount ;
+                //var gst = (decimal)mul * data.TotalAmount;
                 var Balance1 = db.tbl_CustomerDetails.Where(a => a.Id == data.CustomerID).FirstOrDefault();
 
 
-                var WithGST = data.TotalAmount / 0.82M;
+                var WithGST = data.TotalAmount* 1.18M ;
                 var TotalBalance = Balance1.Balance + WithGST;
 
 
@@ -233,8 +235,8 @@ namespace VFoods.Controllers
                     tt.Transporter_name = data.TransporterName;
                     
 
-                    tt.Total_bill = data.TotalAmount / 0.82M; 
-                    tt.Amount_due = data.TotalAmount / 0.82M;
+                    tt.Total_bill = data.TotalAmount * 1.18M ; 
+                    tt.Amount_due = data.TotalAmount * 1.18M;
                     tt.Payment_status_comments = data.Comments;
                     tt.customer_id_fk = data.CustomerID;
                     tt.isDelete = false;
